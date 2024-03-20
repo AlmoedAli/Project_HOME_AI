@@ -50,7 +50,8 @@ Khi đã thực hiện xong, ấn tổ hợp `Ctrl + C` để ngừng chạy web
 * File `index.js` cấp cao nhất (`index.js [1]`) là file chứa các thư viện chính, config của project. Không cần chỉnh sửa file này.
 * Folder views chứa file front end của project. 
   * ExpressJS không sử dụng định dạng `.html` bình thường mà cần một view engine. View engine được sử dụng trong project là `handlebars`, với đuôi file là `.handlebars` (được rút gọn thành `.hbs` trong file `index.js [1]`). Express-handlebars là coi như một file html, có khả năng nhận các biến truyền vào từ phía controller mà không cần script.
-  * Trong folder views chứa folder layouts là thư mục chứa các bố cục chính của project, sẽ được tự động gọi khi controller gọi một view bất kì ngoài layouts. Trong các file layouts chứa biến body, được sử dụng bằng cách gọi `{{{ body }}}`. Khi gọi một view ngoài layouts từ controller, layout tương ứng sẽ được gọi (nếu có, không thì sẽ mặc định dùng main), sau đó là view được gọi sẽ được đặt ở chỗ body.
+  * Trong folder views chứa folder layouts là thư mục chứa các bố cục chính của project, sẽ được tự động gọi khi controller gọi một view bất kì ngoài layouts. Trong các file layouts chứa biến body, được sử dụng bằng cách gọi `{{{ body }}}`. Khi gọi một view ngoài layouts từ controller, layout tương ứng sẽ được gọi (nếu có, không thì sẽ mặc định dùng main), sau đó là view được gọi sẽ được đặt ở chỗ body. 
+  * Code ví dụ trong file trong folder **`Controller`**:
     ```javascript
     index(req, res, next) {
         res.render('user/example', {
@@ -59,6 +60,7 @@ Khi đã thực hiện xong, ấn tổ hợp `Ctrl + C` để ngừng chạy web
         })
     }
     ```
+    Code ví dụ trong file trong folder **`View`**:
     ```hbs
     {{#each variable}}
         {{#if this.a}}
