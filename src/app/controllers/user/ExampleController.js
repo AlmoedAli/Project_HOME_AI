@@ -1,4 +1,4 @@
-// const home = require('../../models/example');
+const example = require('../../models/example');
 
 class ExampleController {
     index(req, res, next) {

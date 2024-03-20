@@ -1,7 +1,7 @@
-const homeRouter = require('./user/home');
+const exampleRouter = require('./user/example');
 
 function route(app) {
-    app.use('/', homeRouter);
+    app.use('/', exampleRouter);
 }
 
 module.exports = route;

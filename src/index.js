@@ -1,6 +1,6 @@
-// const db = require('./config/db');
+const db = require('./config/db');
 
-// db.connect();
+db.connect();
 
 const express = require('express')
 
