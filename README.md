@@ -3,13 +3,13 @@
 ```bash
 cd src
 ```
-1. Install packages
+2. Install packages
 ```bash
 npm i body-parser dotenv express express-handlebars express-session method-override mongodb mongoose path
 npm i nodemon --save-dev
 ```
-1. Create file name ".env" in with same level as "src" folder.
-2. Fill in "DATABASE_URL" variable value.
+3. Create file name ".env" in with same level as "src" folder.
+4. Fill in "DATABASE_URL" variable value.
 ```bash
 DATABASE_URL="linktodb"
 ```
