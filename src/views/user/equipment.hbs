@@ -1,0 +1,17 @@
+
+{{!-- <button type="submit" id="addButton">Add</button> --}}
+{{!-- <button type="submit" id="deleteAllButton">Delete All</button> --}}
+<button type="submit" id="addButton">Xác nhận</button>
+<form id="delete-assign-form" method="post"></form>
+
+<script>
+    $(function() {
+        var addBtn = document.getElementById('addButton');
+        var addForm = document.forms['delete-assign-form'];
+
+        addBtn.onclick = function() {
+            addForm.action = 'equipment/add/' + '?_method=post';
+            addForm.submit();
+        }  
+    })
+</script>
