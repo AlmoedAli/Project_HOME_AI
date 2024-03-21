@@ -1,12 +1,13 @@
 # Setup lần đầu
-Vì việc push kèm thư mục node_modules sẽ khiến project trở nên rất nặng, nên khi clone project lần đầu, tiến hành cài đặt các thư viện cần thiết.
-Mở terminal và gõ:
+Vì việc push kèm thư mục `node_modules` sẽ khiến project trở nên rất nặng, nên khi clone project lần đầu, tiến hành cài đặt các thư viện cần thiết.
+Mở terminal và nhập:
 ```bash
 npm install
 ```
 Ngoài ra, đang trong giai đoạn dev nên file .env sẽ không cần phải thêm vào trong .gitignore
 
 # Chạy web
+Mở terminal và nhập:
 ```bash
 npm start
 ```
@@ -21,7 +22,6 @@ Khi đã thực hiện xong, ấn tổ hợp `Ctrl + C` để ngừng chạy web
 * Back-end:
   * ExpressJS
   * Database: MongoDB
-
 
 # Cấu trúc các folder của project
 <!-- │ ├ ─ └ -->
@@ -45,6 +45,7 @@ Khi đã thực hiện xong, ấn tổ hợp `Ctrl + C` để ngừng chạy web
         └── home.js (?)
 ```
 [n], n là số: Phân biệt các file/folder trùng tên.
+
 (?): Không bắt buộc phải có.
 
 * File `index.js` cấp cao nhất (`index.js [1]`) là file chứa các thư viện chính, config của project. Không cần chỉnh sửa file này.
@@ -100,6 +101,7 @@ Khi đã thực hiện xong, ấn tổ hợp `Ctrl + C` để ngừng chạy web
       </script>
       ```
       Khi ấn vào nút A hoặc B, một modal sẽ hiện lên và giá trị id cần xóa sẽ được truyền vào biến `deleteId`.
+
       Khi ấn nút button xác nhận, chúng ta sẽ truyền id cần xóa vào link của một form ẩn và thực hiện submit form đó cùng với phương thức `delete`.
         ```javascript
         router.delete('/:name_id', exampleController.deleteExample);
@@ -111,6 +113,7 @@ Khi đã thực hiện xong, ấn tổ hợp `Ctrl + C` để ngừng chạy web
         };
         ```
       Để lấy và sử dụng biến `deleteId` truyền từ `view`, hàm `deleteExample` trong file `ExampleController.js` được thực hiện như trên.
+
       Trong ví dụ trên, ta giả sử biến id của vật thể được xóa là một giá trị không nhạy cảm nên có thể sử dụng `request param`. Thực tế, cách thực hành tốt là đối với phương thức GET ta sẽ sử dụng `request param`, còn các phương thức khác như POST, PUT, PATCH, DELETE, ta sẽ sử dụng `request body`. Cách làm chung là trong thẻ `form` của html (hbs) sẽ có các thẻ có 2 thuộc tính là `name` và `value` và một thẻ `<button type="submit"></button>`. Khi thẻ này được ấn thì các cặp name: value tương ứng sẽ được đẩy vào `request body` dưới dạng object, và có thể lấy bằng cách `req.body`. Để thay đổi phần code trên theo định dạng sử dụng `request body` thì ta sẽ cần một thẻ `<input type='hidden'>` trong `form` ẩn và không cần đến biến `deleteId` trong `script`. Trong project này thì không cần thiết về bảo mật nên không cần làm theo cách `request body` đối với phương thức DELETE (vì khá lằng nhằng), còn những phương thức khác (PUT, PATCH, POST) thì có thể sử dụng bình thường.
 * Folder routes chứa file index.js [2]. Đây là file hướng các module đến một đường dẫn trang web nhất định.
   ```javascript
