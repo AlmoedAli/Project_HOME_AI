@@ -5,6 +5,6 @@ const equipmentController = require('../../app/controllers/user/EquipmentControl
 
 router.get('/', equipmentController.index);
 router.post('/add', equipmentController.addNewEquipment);
-router.post('/delete', equipmentController.deleteAllEquipments);
+router.delete('/delete', equipmentController.deleteAllEquipments);
 
 module.exports = router;

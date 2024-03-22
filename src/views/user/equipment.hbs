@@ -1,17 +1,84 @@
+<button class="add-btn" data-bs-toggle="modal" data-bs-target="#modal-add" data-bs-add="a">
+    Add
+</button>
+<div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="modal-add__Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" id="btn-add-confirm">Xác nhận thêm</button>
+        </div>
+    </div>
+</div>
 
-{{!-- <button type="submit" id="addButton">Add</button> --}}
-{{!-- <button type="submit" id="deleteAllButton">Delete All</button> --}}
-<button type="submit" id="addButton">Xác nhận</button>
-<form id="delete-assign-form" method="post"></form>
+<button class="delete-btn" data-bs-toggle="modal" data-bs-target="#modal-delete" data-bs-delete="b">
+    DeleteAll
+</button>
+<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete__Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <button type="button" id="btn-delete-confirm">Xác nhận xóa</button>
+        </div>
+    </div>
+</div>
 
-<script>
-    $(function() {
-        var addBtn = document.getElementById('addButton');
-        var addForm = document.forms['delete-assign-form'];
+<div class="container">
+    <h1>Nhân viên</h1>
+    <form method="post" action="/equipment?_method=PUT">
+        <div style="overflow-y:scroll; height:60vh;">
+            <table class="table" style="margin-top:20px;">
+                <thead class="rounded-top bg-light">
+                    <tr>
+                        <th scope="col" style="width: 185px;">#</th>
+                        <th scope="col" style="width: 300px;">Name</th>
+                        <th scope="col" style="width: 185px;">Location</th>
+                        <th scope="col" style="width: 185px;">InstallationDate</th>
+                    </tr>
+                </thead>
+                <tbody id="scrollViewContainer">
+                    {{#each equipments}}
+                    <tr>
+                        <th scope="row">{{math @index "+" 1}}</th>
+                        <th>{{this.name}}</th>
+                        <th>{{this.location}}</th>
+                        <th>{{this.installationDate}}</th>
+                    </tr>
+                    {{/each}}
+                </tbody>
+            </table>
+        </div>
+        <button type="submit" class="btn btn-success float-right" >Lưu thay đổi</button>
+    </form>
+</div>
+<form id="form-add" method="post"></form>
+<form id="form-delete" method="post"></form>
 
-        addBtn.onclick = function() {
-            addForm.action = 'equipment/add/' + '?_method=post';
-            addForm.submit();
-        }  
-    })
+<script type="text/javascript">
+    var addId;
+    var addBtn = document.getElementById('btn-add-confirm');
+    var addForm = document.forms['form-add']; 
+    var addModal = document.getElementById('modal-add');
+
+    addModal.addEventListener('show.bs.modal', function(event) {
+        var btn = event.relatedTarget;
+        addId = btn.getAttribute('data-bs-add');
+    });
+    
+    addBtn.onclick = function() {
+        addForm.action = '/equipment/add/' + '?_method=post';
+        addForm.submit();
+    }
+
+    var deleteId;
+    var deleteBtn = document.getElementById('btn-delete-confirm');
+    var deleteForm = document.forms['form-delete']; 
+    var deleteModal = document.getElementById('modal-delete');
+
+    deleteModal.addEventListener('show.bs.modal', function(event) {
+        var btn = event.relatedTarget;
+        deleteId = btn.getAttribute('data-bs-delete');
+    });
+    
+    deleteBtn.onclick = function() {
+        deleteForm.action = '/equipment/delete/' + '?_method=delete';
+        deleteForm.submit();
+    }
 </script>
