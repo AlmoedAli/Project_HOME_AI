@@ -4,10 +4,39 @@
 <div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="modal-add__Label" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <button type="button" id="btn-add-confirm">Xác nhận thêm</button>
+            <form method="post" id="form-add">
+                <div class="modal-body">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name"><br>
+                    
+                    <label for="location">Location:</label>
+                    <input type="text" id="location" name="location"><br>
+                    
+                    <label for="type">Type:</label>
+                    <select id="type" name="type" onchange="changeSpecificType()">
+                        <option value="electricity">Electricity</option>
+                        <option value="sensor">Sensor</option>
+                    </select><br>
+                    
+                    <div id="specifictype">
+                        <label for="specificType">Specific Type:</label>
+                        <select id="specificType" name="specificType">
+                            <option value="1">Option 1</option>
+                            <option value="2">Option 2</option>
+                        </select>
+                    </div><br>
+
+                    <label for="powerconsumption">Power Consumption:</label>
+                    <input type="text" id="powerconsumption" name="powerconsumption"><br>
+                </div>
+            </form>
+            <div class="modal-footer">
+                <button type="button" id="btn-add-confirm">Xác nhận thêm</button>
+            </div>
         </div>
     </div>
 </div>
+
 
 <button class="delete-btn" data-bs-toggle="modal" data-bs-target="#modal-delete" data-bs-delete="b">
     DeleteAll
@@ -21,7 +50,7 @@
 </div>
 
 <div class="container">
-    <h1>Nhân viên</h1>
+    <h1>Equipment</h1>
     <form method="post" action="/equipment?_method=PUT">
         <div style="overflow-y:scroll; height:60vh;">
             <table class="table" style="margin-top:20px;">
@@ -29,7 +58,7 @@
                     <tr>
                         <th scope="col" style="width: 185px;">#</th>
                         <th scope="col" style="width: 300px;">Name</th>
-                        <th scope="col" style="width: 185px;">Location</th>
+                        <th scope="col" style="width: 185px;">Type</th>
                         <th scope="col" style="width: 185px;">InstallationDate</th>
                     </tr>
                 </thead>
@@ -38,17 +67,16 @@
                     <tr>
                         <th scope="row">{{math @index "+" 1}}</th>
                         <th>{{this.name}}</th>
-                        <th>{{this.location}}</th>
+                        <th>{{this.type}}</th>
                         <th>{{this.installationDate}}</th>
                     </tr>
                     {{/each}}
                 </tbody>
             </table>
         </div>
-        <button type="submit" class="btn btn-success float-right" >Lưu thay đổi</button>
+        {{!-- <button type="submit" class="btn btn-success float-right" >Lưu thay đổi</button> --}}
     </form>
 </div>
-<form id="form-add" method="post"></form>
 <form id="form-delete" method="post"></form>
 
 <script type="text/javascript">
@@ -81,4 +109,25 @@
         deleteForm.action = '/equipment/delete/' + '?_method=delete';
         deleteForm.submit();
     }
+
+    function changeSpecificType() {
+        var typeSelect = document.getElementById("type");
+        var specificTypeSelect = document.getElementById("specificType");
+        var specificTypeDiv = document.getElementById("specifictype");
+
+        if (typeSelect.value === "sensor") {
+            specificTypeSelect.innerHTML = `
+                <option value="3">Option 3</option>
+                <option value="4">Option 4</option>
+            `;
+        } 
+        else 
+        {
+            specificTypeSelect.innerHTML = `
+                <option value="1">Option 1</option>
+                <option value="2">Option 2</option>
+            `;
+        }
+    }
+
 </script>
