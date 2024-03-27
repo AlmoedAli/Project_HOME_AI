@@ -1,133 +1,116 @@
-<button class="add-btn" data-bs-toggle="modal" data-bs-target="#modal-add" data-bs-add="a">
-    Add
-</button>
-<div class="modal fade" id="modal-add" tabindex="-1" role="dialog" aria-labelledby="modal-add__Label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <form method="post" id="form-add">
-                <div class="modal-body">
-                    <label for="name">Name:</label>
-                    <input type="text" id="name" name="name"><br>
-                    
-                    <label for="location">Location:</label>
-                    <input type="text" id="location" name="location"><br>
-                    
-                    <label for="type">Type:</label>
-                    <select id="type" name="type" onchange="changeSpecificType()">
-                        <option value="electricity">Electricity</option>
-                        <option value="sensor">Sensor</option>
-                    </select><br>
-                    
-                    <div id="specifictype">
-                        <label for="specificType">Specific Type:</label>
-                        <select id="specificType" name="specificType">
-                            <option value="1">Option 1</option>
-                            <option value="2">Option 2</option>
-                        </select>
-                    </div><br>
 
-                    <label for="powerconsumption">Power Consumption:</label>
-                    <input type="text" id="powerconsumption" name="powerconsumption"><br>
+<div class="container">
+    <div class="row mt-3">
+        <h3>Thông tin thiết bị</h3>
+    </div>
+    <div class="row mt-3 mb-3">
+        <div class="col-12 border" style="border-radius: 8px">
+            <div class="row mt-3">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Tên thiết bị: {{equipments.[0].name}}
+                            </div>
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Loại thiết bị: {{equipments.[0].type}}
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </form>
-            <div class="modal-footer">
-                <button type="button" id="btn-add-confirm">Xác nhận thêm</button>
+            </div>
+            <div class="row mt-1">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Vị trí: {{equipments.[0].location}}
+                            </div>
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Trạng thái: {{equipments.[0].state}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Công suất: {{equipments.[0].location}}
+                            </div>
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Hẹn giờ: {{equipments.[0].location}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Hẹn giờ bật: {{equipments.[0].location}}
+                            </div>
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Hẹn giờ tắt: {{equipments.[0].location}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12 d-flex justify-content-center">
+                    <h4>Thời gian sử dụng</h4>
+                </div>
+                <div class="row p-0 m-0 mt-2 mb-3 d-flex justify-content-center">
+                    <div class="col-11" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                        <div class="row">
+                            <div class="col-6 mt-2">
+                                <p>Tổng thời gian sử dụng</p>
+                            </div>
+                            <div class="col-6 d-flex justify-content-end">
+                                <div class="form-group">
+                                    <label for="dayDropdown"></label>
+                                    <select class="form-control float-right" id="dayDropdown" style="width: 125px; border: 1px solid #ccc; border-radius: 8px;">
+                                        <option value="">Ngày</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <canvas id="temperatureLineChart" width="400" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-0 mt-2 mb-3">
+                <div class="row justify-content-end">
+                    <div class="col-11 justify-content-end">
+                        <div class="row justify-content-end">
+                            <div class="col-auto">
+                                <button type="button" class="btn" style="background-color: #7E25CA; color: white">Xuất lịch sử</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn" style="background-color: #7E25CA; color: white">Chỉnh sửa</button>
+                            </div>
+                            <div class="col-auto">
+                                <button type="button" class="btn" style="background-color: #F80D0D; color: white">Xóa</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<button class="delete-btn" data-bs-toggle="modal" data-bs-target="#modal-delete" data-bs-delete="b">
-    DeleteAll
-</button>
-<div class="modal fade" id="modal-delete" tabindex="-1" role="dialog" aria-labelledby="modal-delete__Label" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <button type="button" id="btn-delete-confirm">Xác nhận xóa</button>
-        </div>
-    </div>
-</div>
 
-<div class="container">
-    <h1>Equipment</h1>
-    <form method="post" action="/equipment?_method=PUT">
-        <div style="overflow-y:scroll; height:60vh;">
-            <table class="table" style="margin-top:20px;">
-                <thead class="rounded-top bg-light">
-                    <tr>
-                        <th scope="col" style="width: 185px;">#</th>
-                        <th scope="col" style="width: 300px;">Name</th>
-                        <th scope="col" style="width: 185px;">Type</th>
-                        <th scope="col" style="width: 185px;">InstallationDate</th>
-                    </tr>
-                </thead>
-                <tbody id="scrollViewContainer">
-                    {{#each equipments}}
-                    <tr>
-                        <th scope="row">{{math @index "+" 1}}</th>
-                        <th>{{this.name}}</th>
-                        <th>{{this.type}}</th>
-                        <th>{{this.installationDate}}</th>
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
-        </div>
-        {{!-- <button type="submit" class="btn btn-success float-right" >Lưu thay đổi</button> --}}
-    </form>
-</div>
-<form id="form-delete" method="post"></form>
-
-<script type="text/javascript">
-    var addId;
-    var addBtn = document.getElementById('btn-add-confirm');
-    var addForm = document.forms['form-add']; 
-    var addModal = document.getElementById('modal-add');
-
-    addModal.addEventListener('show.bs.modal', function(event) {
-        var btn = event.relatedTarget;
-        addId = btn.getAttribute('data-bs-add');
-    });
-    
-    addBtn.onclick = function() {
-        addForm.action = '/equipment/add/' + '?_method=post';
-        addForm.submit();
-    }
-
-    var deleteId;
-    var deleteBtn = document.getElementById('btn-delete-confirm');
-    var deleteForm = document.forms['form-delete']; 
-    var deleteModal = document.getElementById('modal-delete');
-
-    deleteModal.addEventListener('show.bs.modal', function(event) {
-        var btn = event.relatedTarget;
-        deleteId = btn.getAttribute('data-bs-delete');
-    });
-    
-    deleteBtn.onclick = function() {
-        deleteForm.action = '/equipment/delete/' + '?_method=delete';
-        deleteForm.submit();
-    }
-
-    function changeSpecificType() {
-        var typeSelect = document.getElementById("type");
-        var specificTypeSelect = document.getElementById("specificType");
-        var specificTypeDiv = document.getElementById("specifictype");
-
-        if (typeSelect.value === "sensor") {
-            specificTypeSelect.innerHTML = `
-                <option value="3">Option 3</option>
-                <option value="4">Option 4</option>
-            `;
-        } 
-        else 
-        {
-            specificTypeSelect.innerHTML = `
-                <option value="1">Option 1</option>
-                <option value="2">Option 2</option>
-            `;
-        }
-    }
-
-</script>
