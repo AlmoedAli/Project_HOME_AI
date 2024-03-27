@@ -1,5 +1,150 @@
-{{#each variable}}
-    {{#if this.a}}
-        {{this.b}}
-    {{/if}}
-{{/each}}
+
+<h1>Trang chủ</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-8">
+            <div class="row p-0 mb-3">
+                <div class="col-12" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px; border-radius: 8px">
+                    <div class="row">
+                        <div class="col-6 mt-2">
+                            <h5>Nhiệt độ trung bình</h5>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <div class="form-group">
+                                <label for="dayDropdown"></label>
+                                <select class="form-control float-right" id="dayDropdown" style="width: 125px; border: 1px solid #ccc; border-radius: 8px;">
+                                    <option value="">Ngày</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="temperatureLineChart" width="400" height="150"></canvas>
+                </div>
+            </div>
+            <div class="row p-0 mb-3">
+                <div class="col-12" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px; border-radius: 8px">
+                    <div class="row">
+                        <div class="col-6 mt-2">
+                            <h5>Độ ẩm trung bình</h5>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end">
+                            <div class="form-group">
+                                <label for="dayDropdown"></label>
+                                <select class="form-control float-right" id="dayDropdown" style="width: 125px; border: 1px solid #ccc; border-radius: 8px;">
+                                    <option value="">Ngày</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                    <option value="6">6</option>
+                                    <option value="7">7</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <canvas id="humidityLineChart" width="400" height="150"></canvas>
+                </div>
+            </div>
+            <div class="row p-0 mb-3">
+                <div class="col-3">
+                    <div class="col-12 d-flex justify-content-center" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                        <div style="display: flex; flex-direction: column; align-items: center">
+                            <span class="mb-3" style="color: #7E25CA; font-size: 24px">
+                                30*C
+                            </span>
+                            <span>
+                                Nhiệt độ hiện tại
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="col-12 d-flex justify-content-center" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                        <div style="display: flex; flex-direction: column; align-items: center">
+                            <span class="mb-3" style="color: #7E25CA; font-size: 24px">
+                                70%
+                            </span>
+                            <span>
+                                Độ ẩm hiện tại
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="col-12 d-flex justify-content-center" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                        <p>Đèn 1</p>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="col-12 d-flex justify-content-center" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                        <p>Đèn 2</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="row p-0 mb-3">
+                <div class="col-11" style="margin-left: 12px; border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                    <div class="row">
+                        <div class="col-6 mt-3 mb-3">
+                            <h5>Thông báo</h5>
+                        </div>
+                        <div class="col-6 d-flex justify-content-end mt-2 mb-2">
+                            <button type="button" class="btn" style="background-color: #7E25CA; color: white">Xem tất cả</button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10"><p>Cảm biến độ ẩm vượt ngưỡng</p></div>
+                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
+                            <p>12:39</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10"><p>Bật đèn 1</p></div>
+                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
+                            <p>12:15</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10"><p>Cảm biến nhiệt độ vượt ngưỡng</p></div>
+                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
+                            <p>9:11</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10"><p>Giọng nói lạ</p></div>
+                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
+                            <p>8:02</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10"><p>Giọng nói lạ</p></div>
+                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
+                            <p>8:00</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10"><p>Giọng nói lạ</p></div>
+                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
+                            <p>7:43</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-10"><p>Tắt đèn 1</p></div>
+                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
+                            <p>7:15</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
