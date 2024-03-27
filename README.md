@@ -115,6 +115,7 @@ Khi đã thực hiện xong, ấn tổ hợp `Ctrl + C` để ngừng chạy web
       Để lấy và sử dụng biến `deleteId` truyền từ `view`, hàm `deleteExample` trong file `ExampleController.js` được thực hiện như trên.
 
       Trong ví dụ trên, ta giả sử biến id của vật thể được xóa là một giá trị không nhạy cảm nên có thể sử dụng `request param`. Thực tế, cách thực hành tốt là đối với phương thức GET ta sẽ sử dụng `request param`, còn các phương thức khác như POST, PUT, PATCH, DELETE, ta sẽ sử dụng `request body`. Cách làm chung là trong thẻ `form` của html (hbs) sẽ có các thẻ có 2 thuộc tính là `name` và `value` và một thẻ `<button type="submit"></button>`. Khi thẻ này được ấn thì các cặp name: value tương ứng sẽ được đẩy vào `request body` dưới dạng object, và có thể lấy bằng cách `req.body`. Để thay đổi phần code trên theo định dạng sử dụng `request body` thì ta sẽ cần một thẻ `<input type='hidden'>` trong `form` ẩn và không cần đến biến `deleteId` trong `script`. Trong project này thì không cần thiết về bảo mật nên không cần làm theo cách `request body` đối với phương thức DELETE (vì khá lằng nhằng), còn những phương thức khác (PUT, PATCH, POST) thì có thể sử dụng bình thường.
+  * Folder public là root trong view, nên khi thêm style css (hoặc bất cứ thứ gì từ trong folder public), không cần thêm địa chỉ của public.
 * Folder routes chứa file index.js [2]. Đây là file hướng các module đến một đường dẫn trang web nhất định.
   ```javascript
   const exampleRouter = require('./user/example');
