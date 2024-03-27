@@ -1,9 +1,21 @@
-<h1>Trang chủ</h1>
 <div class="container">
     <div class="row">
+        <div class="col-6 p-0">
+            <h3>Trang chủ</h3>
+        </div>
+        <div class="col-6 d-flex justify-content-end align-items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#7E25CA" class="bi bi-clock" viewBox="0 0 24 24">
+                <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
+            </svg>
+            <h4 id="current-time" style="color: #7E25CA"></h4>
+        </div>
+    </div>
+
+    <div class="row mt-3">
         <div class="col-8">
             <div class="row p-0 mb-3">
-                <div class="col-12" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px; border-radius: 8px">
+                <div class="col-12 bg-white" style="margin-bottom: 10px; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
                     <div class="row">
                         <div class="col-6 mt-2">
                             <h5>Nhiệt độ trung bình</h5>
@@ -11,7 +23,7 @@
                         <div class="col-6 d-flex justify-content-end">
                             <div class="form-group">
                                 <label for="dayDropdown"></label>
-                                <select class="form-control float-right" id="dayDropdown" style="width: 125px; border: 1px solid #ccc; border-radius: 8px;">
+                                <select class="form-control float-right" id="dayDropdown" style="width: 125px; border-radius: 8px;">
                                     <option value="">Ngày</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -24,11 +36,11 @@
                             </div>
                         </div>
                     </div>
-                    <canvas id="temperatureLineChart" width="400" height="150"></canvas>
+                    <canvas id="temperatureLineChart" width="400" height="75"></canvas>
                 </div>
             </div>
             <div class="row p-0 mb-3">
-                <div class="col-12" style="border: 1px solid #ccc; margin-bottom: 10px; padding: 10px; border-radius: 8px">
+                <div class="col-12 bg-white" style="margin-bottom: 10px; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
                     <div class="row">
                         <div class="col-6 mt-2">
                             <h5>Độ ẩm trung bình</h5>
@@ -36,7 +48,7 @@
                         <div class="col-6 d-flex justify-content-end">
                             <div class="form-group">
                                 <label for="dayDropdown"></label>
-                                <select class="form-control float-right" id="dayDropdown" style="width: 125px; border: 1px solid #ccc; border-radius: 8px;">
+                                <select class="form-control float-right" id="dayDropdown" style="width: 125px; border-radius: 8px;">
                                     <option value="">Ngày</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
@@ -49,12 +61,12 @@
                             </div>
                         </div>
                     </div>
-                    <canvas id="humidityLineChart" width="400" height="150"></canvas>
+                    <canvas id="humidityLineChart" width="400" height="75"></canvas>
                 </div>
             </div>
             <div class="row p-0 mb-3">
                 <div class="col-3">
-                    <div class="col-12 d-flex justify-content-center" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                    <div class="col-12 d-flex justify-content-center bg-white" style=" padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
                         <div style="display: flex; flex-direction: column; align-items: center">
                             <span class="mb-3" style="color: #7E25CA; font-size: 24px">
                                 30*C
@@ -66,7 +78,7 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="col-12 d-flex justify-content-center" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                    <div class="col-12 d-flex justify-content-center bg-white" style=" padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
                         <div style="display: flex; flex-direction: column; align-items: center">
                             <span class="mb-3" style="color: #7E25CA; font-size: 24px">
                                 70%
@@ -78,26 +90,54 @@
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="col-12 d-flex justify-content-center" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
-                        <p>Đèn 1</p>
+                    <div class="col-12 d-flex justify-content-center bg-white" style=" padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
+                        <div style="display: flex; flex-direction: column; align-items: center">
+                            <div class="row">
+                                <div class="col-6">
+                                    <svg id="lightbulb1" xmlns="http://www.w3.org/2000/svg" width="48px" height="48px" fill="#7E25CA" class="bi bi-lightbulb" viewBox="0 0 24 24">
+                                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                                    </svg>
+                                </div>
+                                <div class="col-6">
+                                    <svg id="toggle1" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#7E25CA" class="bi bi-toggle-on" viewBox="0 0 24 24" onclick="toggleIcon(1)">
+                                        <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Đèn 1</span>
+                        </div>
                     </div>
                 </div>
                 <div class="col-3">
-                    <div class="col-12 d-flex justify-content-center" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px">
-                        <p>Đèn 2</p>
+                    <div class="col-12 d-flex justify-content-center bg-white" style=" padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
+                        <div style="display: flex; flex-direction: column; align-items: center">
+                            <div class="row">
+                                <div class="col-6">
+                                    <svg id="lightbulb2" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#7E25CA" class="bi bi-lightbulb" viewBox="0 0 24 24">
+                                        <path d="M2 6a6 6 0 1 1 10.174 4.31c-.203.196-.359.4-.453.619l-.762 1.769A.5.5 0 0 1 10.5 13a.5.5 0 0 1 0 1 .5.5 0 0 1 0 1l-.224.447a1 1 0 0 1-.894.553H6.618a1 1 0 0 1-.894-.553L5.5 15a.5.5 0 0 1 0-1 .5.5 0 0 1 0-1 .5.5 0 0 1-.46-.302l-.761-1.77a2 2 0 0 0-.453-.618A5.98 5.98 0 0 1 2 6m6-5a5 5 0 0 0-3.479 8.592c.263.254.514.564.676.941L5.83 12h4.342l.632-1.467c.162-.377.413-.687.676-.941A5 5 0 0 0 8 1"/>
+                                    </svg>
+                                </div>
+                                <div class="col-6">
+                                    <svg id="toggle2" xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="#7E25CA" class="bi bi-toggle-on" viewBox="0 0 24 24" onclick="toggleIcon(2)">
+                                        <path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/>
+                                    </svg>
+                                </div>
+                            </div>
+                            <span>Đèn 2</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-4">
             <div class="row p-0 mb-3">
-                <div class="col-11" style="margin-left: 12px; border: 1px solid #ccc; padding: 10px; border-radius: 8px">
+                <div class="col-11 bg-white" style="margin-left: 12px; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
                     <div class="row">
                         <div class="col-6 mt-3 mb-3">
                             <h5>Thông báo</h5>
                         </div>
                         <div class="col-6 d-flex justify-content-end mt-2 mb-2">
-                            <button type="button" class="btn" style="background-color: #7E25CA; color: white">Xem tất cả</button>
+                            <button type="button" class="btn" style="background-color: #7E25CA; color: white; padding: 8px 24px;">Xem tất cả</button>
                         </div>
                     </div>
                     <div class="row">
@@ -179,7 +219,12 @@
                 y: {
                     beginAtZero: false
                 }
-            }
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
         }
     };
 
@@ -191,10 +236,47 @@
                 y: {
                     beginAtZero: false
                 }
-            }
+            },
+            plugins: {
+                legend: {
+                    display: false,
+                },
+            },
         }
     };
 
     var temperatureLineChart = new Chart(document.getElementById('temperatureLineChart'), temperatureConfig);
     var humidityLineChart = new Chart(document.getElementById('humidityLineChart'), humidityConfig);
+
+    function updateTime() {
+        const now = new Date();
+        const options = { hour: 'numeric', minute: 'numeric', hour12: false };
+        const timeString = now.toLocaleTimeString(undefined, options);
+        document.getElementById("current-time").textContent = timeString;
+    }
+
+    updateTime();
+    setInterval(updateTime, 1000);
+
+    function toggleIcon(num) {
+        var toggle = document.getElementById('toggle' + num.toString());
+        var lightbulb = document.getElementById('lightbulb' + num.toString());
+
+        if (toggle.classList.contains('bi-toggle-on')) {
+            toggle.classList.remove('bi-toggle-on');
+            toggle.classList.add('bi-toggle-off');
+            toggle.setAttribute('fill', 'black');
+            toggle.innerHTML = '<path d="M11 4a4 4 0 0 1 0 8H8a5 5 0 0 0 2-4 5 5 0 0 0-2-4zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8M0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5"/>'
+
+            lightbulb.setAttribute('fill', 'black');
+        } else if (toggle.classList.contains('bi-toggle-off')) {
+            toggle.classList.remove('bi-toggle-off');
+            toggle.classList.add('bi-toggle-on');
+            toggle.setAttribute('fill', '#7E25CA');
+            toggle.innerHTML = '<path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/>';
+
+            lightbulb.setAttribute('fill', '#7E25CA');
+        }
+    }
+
 </script>

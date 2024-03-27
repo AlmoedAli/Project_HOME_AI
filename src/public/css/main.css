@@ -9,6 +9,9 @@ body {
     height: -webkit-fill-available;
     max-height: 100vh;
     overflow-x: auto;
+}
+
+.sidebar {
     overflow-y: hidden;
 }
 
@@ -17,14 +20,21 @@ body {
 }
 
 .nav-pills .nav-block:not(.active-page):hover {
-    background-color: blue !important;
-}
-
-.nav-block.active-page{
     background-color: white !important;
     color: black !important;
 }
 
+.nav-block.active-page{
+    background-color: #F4F7FC !important;
+    color: black !important;
+}
+
+#content {
+    width: 100%;
+    overflow-y: auto;
+    padding: 24px 64px;
+    background-color: #F4F7FC;
+}
 /* li:has(.nav-block.active-page)::before {
     content: '';
     box-shadow: 214px -10px 0 10px;
