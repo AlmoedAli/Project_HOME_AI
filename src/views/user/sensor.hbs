@@ -1,7 +1,7 @@
 
 <div class="container">
     <div class="row">
-        <h3 class="p-0">Thông tin thiết bị</h3>
+        <h3 class="p-0">Thông tin cảm biến</h3>
     </div>
     <div class="row mt-3 mb-3">
         <div class="col-12 border bg-white" style="border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
@@ -10,24 +10,10 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
-                                Tên thiết bị: {{equipments.[0].name}}
+                                Tên cảm biến: {{sensors.[0].name}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Loại thiết bị: {{equipments.[0].type}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-11">
-                        <div class="row">
-                            <div class="col-6 m-0 p-0 mt-2">
-                                Vị trí: {{equipments.[0].location}}
-                            </div>
-                            <div class="col-6 m-0 p-0 mt-2">
-                                Trạng thái: {{equipments.[0].state}}
+                                Loại cảm biến: {{sensors.[0].type}}
                             </div>
                         </div>
                     </div>
@@ -38,10 +24,10 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
-                                Công suất: 36W
+                                Vị trí: {{sensors.[0].location}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ: Có
+                                Giá trị: {{sensors.[0].state}}
                             </div>
                         </div>
                     </div>
@@ -52,10 +38,10 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ bật: 20:30
+                                Ngưỡng an toàn: 40% - 80%
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ tắt: 5:00
+                                Sai số: 0.5%
                             </div>
                         </div>
                     </div>
@@ -63,13 +49,13 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12 d-flex justify-content-center">
-                    <h4>Thời gian sử dụng</h4>
+                    <h4>Giá trị cảm biến</h4>
                 </div>
                 <div class="row p-0 m-0 mt-2 mb-3 d-flex justify-content-center">
                     <div class="col-11" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
                         <div class="row">
                             <div class="col-6 mt-2">
-                                <p>Tổng thời gian sử dụng</p>
+                                <p>Độ ẩm trung bình</p>
                             </div>
                             <div class="col-6 d-flex justify-content-end">
                                 <div class="form-group">
@@ -86,7 +72,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <canvas id="timeLineChart" width="400" height="75"></canvas>
+                            <canvas id="humidityLineChart" width="400" height="75"></canvas>
                         </div>
                     </div>
                 </div>
@@ -112,27 +98,24 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const timeData = {
-        labels: ['Mon', 'Tue', 'Web', 'Thu', 'Fri', 'Sat', 'Sun'],
+    const humidityData = {
+        labels: ['5', '6', '7', '8', '9', '10', '11','12','13','14','15','16'],
         datasets: [{
             label: 'time Data',
-            data: [12, 13, 12, 13, 12, 13, 14],
+            data: [12, 13, 12, 13, 12, 13, 14, 12, 13, 12, 13, 12],
             fill: false,
-            backgroundColor: '#7E25CA',
             borderColor: '#7E25CA',
-            borderWidth: 1,
-            barThickness: 30,
-            borderRadius: 4,
+            tension: 0.1 
         }]
     };
 
-    const timeConfig = {
-        type: 'bar',
-        data: timeData,
+    const humidityConfig = {
+        type: 'line',
+        data: humidityData,
         options: {
             scales: {
                 y: {
-                    beginAtZero: true
+                    beginAtZero: false
                 }
             },
             plugins: {
@@ -143,6 +126,6 @@
         }
     };
 
-    var timeLineChart = new Chart(document.getElementById('timeLineChart'), timeConfig);
+    var humidityLineChart = new Chart(document.getElementById('humidityLineChart'), humidityConfig);
 </script>
 

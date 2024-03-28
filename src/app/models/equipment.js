@@ -3,12 +3,13 @@ const { ObjectId } = require('mongodb');
 
 const EquipmentSchema = new mongoose.Schema(
     {
-        Name: {type: String, required: true},
-        Location: {type: String, required: true},
-        Type: {type: String, required: true},
-        State: {type: Boolean, required: true},
-        InstallationDate: {type: Date, required: true},
-        PowerConsumption: {type: Number, required: true},
+        DeviceID: {type: ObjectId, required: true},
+        ElectricityEqType: {type: String, required: true},
+        UsageHistory: {
+            UsageStartTime: {type: Date},
+            UsageEndTime: {type: Date},
+        }
+        // PowerConsumped: {type: Number, required: true},
     },
     {collection: 'equipment'}
 ) 
