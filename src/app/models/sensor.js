@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { ObjectId } = require('mongodb');
+const { DeviceSchema } = require('./device');
 
 const SensorSchema = new mongoose.Schema(
     {
