@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 
 const EquipmentSchema = new mongoose.Schema(
     {
-        DeviceID: {type: ObjectId, required: true},
+        DeviceID: {type: ObjectId, ref: 'Device'},
         ElectricityEqType: {type: String, required: true},
         UsageHistory: {
             UsageStartTime: {type: Date},

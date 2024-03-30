@@ -3,7 +3,7 @@ const { ObjectId } = require('mongodb');
 
 const SensorSchema = new mongoose.Schema(
     {
-        DeviceID: {type: ObjectId, required: true},
+        DeviceID: {type: ObjectId, ref: 'Device'},
         SensorType: {type: String, required: true},
         ReadingHistory: {
             ReadingDateTime: {type: Date},
