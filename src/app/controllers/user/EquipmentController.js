@@ -83,6 +83,39 @@ class EquipmentController {
             res.status(500).json({ error: 'An error occurred while deleting the equipments' });
         }
     };
+
+
+    index_modify(req, res, next) {
+        equipment.find()
+            .then(equipmentsOb => {
+                const equipments = equipmentsOb.map(equipment => {
+                    return {
+                        _id: equipment._id,
+                        name: equipment.Name,
+                        location: equipment.Location,
+                        type: equipment.Type,
+                        state: equipment.State,
+                        installationDate: equipment.InstallationDate,
+                        powerConsumption: equipment.PowerConsumption,
+                    }
+                })
+                res.render('user/equipment_modify', {
+                    layout: 'main',
+                    equipments: equipments
+                })
+            })
+            .catch(next);
+    }
+
+    async modifyEquipment(req, res, next) {
+        try {
+            const result = await User.updateOne({ _id: userId }, { age: newAge });
+        } 
+        catch (error) {
+            console.error('Error modifying equipments:', error);
+            res.status(500).json({ error: 'An error occurred while modifying the equipments' });
+        }
+    };
 }
 
 module.exports = new EquipmentController;
