@@ -1,0 +1,24 @@
+<div
+	id="list-view-button"
+	class="d-flex flex-row justify-content-center align-items-center p-0"
+	style="border-radius: 12px; box-sizing: border-box; height: 36px;"
+>
+	<button
+		class="d-flex flex-row flex-wrap justify-content-center align-items-center align-content-center border-0"
+		style="width: 48px; height: 36px; border-radius: 12px; gap: 2px; box-sizing: border-box; padding: 0 8px; background-color: #7e25ca;"
+	>
+		{{#repeat 4}}
+			<div
+				style="width: 10px; height: 10px; border-radius:2px; border: 1px solid white"
+			></div>
+		{{/repeat}}
+	</button>
+	<button
+		class="d-flex flex-column bg-white align-items-center justify-content-between border-0"
+		style="width: 48px; height: 36px; border-radius: 12px; padding: 8px 0;"
+	>
+		{{#repeat 3}}
+			<div style="width: 20px; height: 0; border: 2px solid black"></div>
+		{{/repeat}}
+	</button>
+</div>

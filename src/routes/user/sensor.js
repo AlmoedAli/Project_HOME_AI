@@ -1,10 +1,11 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const { isAuthenticated } = require('../../middlewares/session');
-const sensorController = require('../../app/controllers/user/SensorController')
+const { isAuthenticated } = require("../../middlewares/session");
+const sensorController = require("../../app/controllers/user/SensorController");
 
-router.get('/', sensorController.index);
-router.post('/add', sensorController.addNewSensor);
-router.delete('/delete', sensorController.deleteAllSensors);
+router.get("/main", sensorController.getSensors);
+router.get("/", sensorController.index);
+router.post("/add", sensorController.addNewSensor);
+router.delete("/delete", sensorController.deleteAllSensors);
 
 module.exports = router;

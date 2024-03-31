@@ -1,0 +1,11 @@
+<div class="dropdown">
+    <button class="btn dropdown-toggle border-1 border-dark" type="button" id="dropdownMenuButton1"
+        data-bs-toggle="dropdown" aria-expanded="false">
+        {{selections.0.value}}
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+        {{#each selections}}
+        <li><a class="dropdown-item" href="#">{{this.value}}</a></li>
+        {{/each}}
+    </ul>
+</div>
