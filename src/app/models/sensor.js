@@ -1,9 +1,10 @@
 const mongoose = require('mongoose');
 const { ObjectId } = require('mongodb');
+const { DeviceSchema } = require('./device');
 
 const SensorSchema = new mongoose.Schema(
     {
-        EquipmentID: {type: ObjectId, required: true},
+        DeviceID: {type: ObjectId, ref: 'Device'},
         SensorType: {type: String, required: true},
         ReadingHistory: {
             ReadingDateTime: {type: Date},
