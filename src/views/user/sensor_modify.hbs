@@ -20,20 +20,20 @@
                     <div class="col-11">
                         <div class="row ">
                             <div class="col-2 m-0 p-0 mt-2">
-                                Tên thiết bị: 
+                                Tên cảm biến: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4 ">
-                                <input name="EquipmentName" id="id1"  class="form-control form-control-sm" defaultValue={{equipments.[0].name}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{equipments.[0].name}}}>
+                                <input name="SensorName" id="id1"  class="form-control form-control-sm" defaultValue={{Sensors.[0].name}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].name}}}>
                                 </input>
                             </div>
                             
                             <div class="col-2 m-0 p-0 mt-2">
-                                Loại thiết bị: 
+                                Loại cảm biến: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="EquipmentType" id="id2"  class="form-select form-select-sm" defaultValue={{equipments.[0].type}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Đèn">Đèn</option>
-                                    <option value="Quạt">Quạt</option>
+                                <select name="SensorType" id="id2"  class="form-select form-select-sm" defaultValue={{Sensors.[0].type}} col-4 m-0 p-1 mt-0 mr-4ge} >
+                                    <option value="Nhiệt độ - Độ ẩm">Nhiệt độ - Độ ẩm</option>
+                                    <option value="Ánh sáng">Ánh sáng</option>
                                 </select>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                                 Vị trí: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="EquipmentLocation" id="id3"  class=" form-select form-select-sm" defaultValue={{equipments.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} >
+                                <select name="SensorLocation" id="id3"  class=" form-select form-select-sm" defaultValue={{Sensors.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} >
                                     <option value="Phòng khách">Phòng khách</option>
                                     <option value="Phòng ngủ">Phòng ngủ</option>
                                     <option value="Phòng ăn">Phòng ăn</option>
@@ -57,13 +57,11 @@
                             </div>
                             
                             <div class="col-2 m-0 p-0 mt-2">
-                                Trạng thái:                                
+                                Ngưỡng trên:                                
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">                            
-                                <select name="EquipmentState" id="id4"  class="form-select form-select-sm" defaultValue={{equipments.[0].state}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Bật">Bật</option>
-                                    <option value="Tắt">Tắt</option>
-                                </select>
+                                <input name="SensorPowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{Sensors.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].location}}} >
+                                </input>
                             </div>
                         </div>
                     </div>
@@ -74,58 +72,31 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-2 m-0 p-0 mt-2">
-                                Công suất: 
+                                Đơn vị tính: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input name="EquipmentPowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{equipments.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{equipments.[0].location}}} >
+                                <input name="SensorPowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{Sensors.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].location}}} >
                                 </input> 
                             </div>
                             
                             <div class="col-2 m-0 p-0 mt-2">
-                                Hẹn giờ: 
+                                Ngưỡng dưới: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="EquipmentIsTimer" id="id6" class="form-select form-select-sm" defaultValue={{equipments.[0].state}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Có">Có</option>
-                                    <option value="Không">Không</option>
-                                </select>
+                                <input name="SensorPowerConsumption" id="id6"  class="form-control form-control-sm"  defaultValue={{Sensors.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].location}}} >
+                                </input> 
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-1">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-11">
-                        <div class="row">
-                            <div class="col-2 m-0 p-0 mt-2">
-                                Hẹn giờ bật: 
-
-                            </div>
-                            <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input type="datetime-local" id="id7"  class="form-control form-control-sm" name="EquipmentTimerTurnOn" defaultValue={{equipments.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                </input>
-                            </div>
-                            
-                            <div class="col-2 m-0 p-0 mt-2">
-                                Hẹn giờ tắt: 
-                            </div>
-                            <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input type="datetime-local" id="id8"  class="form-control form-control-sm" name="EquipmentTimerTurnOff" defaultValue={{equipments.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                </input>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div> 
 
             <div class="row justify-content-center">
                 <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
                     <div class="row justify-content-end">
                             <div class="col-auto p-0">
-                                <a href="/equipment" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;" > Huỷ bỏ </a>
+                                <a href="/sensor" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;" > Huỷ bỏ </a>
                             </div>
                             <div class="col-auto p-0">
                                 <button type="button" onclick="saveData()" class="btn" style="background-color: #7E25CA; color: white">Lưu</button>
@@ -148,6 +119,6 @@
             console.log(document.getElementById(input_src).value)
         } --}}
         
-        window.location.href = "/equipment";
+        window.location.href = "/sensor";
     }
 </script>

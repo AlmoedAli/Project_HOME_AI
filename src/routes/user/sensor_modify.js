@@ -1,0 +1,10 @@
+const express = require('express');
+const router = express.Router();
+const { isAuthenticated } = require('../../middlewares/session');
+const sensorController = require('../../app/controllers/user/SensorController')
+
+router.get('/', sensorController.index_modify);
+router.post('/add', sensorController.addNewSensor);
+router.delete('/delete', sensorController.deleteAllSensors);
+
+module.exports = router;
