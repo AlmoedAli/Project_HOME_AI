@@ -93,15 +93,15 @@ li:has(.nav-block.active-page)::after {
 	border: 1px solid var(--half-gray);
 }
 
-/* #search-bar > input:focus {
+#search-bar > input:focus {
 	outline: none;
-} */
+}
 
-/* .app-shadow {
+.app-shadow {
 	box-shadow: 0 0 20px -8px rgba(0, 0, 0, 0.25);
-} */
+}
 
-/* .toggle-switch {
+.toggle-switch {
 	width: 40px;
 	height: 16px;
 	border-radius: 8px;
@@ -110,14 +110,14 @@ li:has(.nav-block.active-page)::after {
 	align-items: center;
 	padding: 0 4px;
 	background-color: #aaa;
-} */
+}
 
-/* .toggle-switch[data-state="true"] {
+.toggle-switch[data-state="true"] {
 	background-color: #7e25ca;
 	flex-direction: row-reverse;
-} */
+}
 
-/* .circle {
+.circle {
 	border-radius: 50%;
 	aspect-ratio: 1/1;
-} */
+}
