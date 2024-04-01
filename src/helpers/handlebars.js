@@ -1,4 +1,5 @@
 const repeat = require("./repeat");
+const readSVG = require("./readSVG");
 
 var register = function (Handlebars) {
 	var helpers = {
@@ -15,6 +16,10 @@ var register = function (Handlebars) {
 			}[operator];
 		},
 		repeat,
+		readSVG,
+		print: function (value) {
+			console.log(value);
+		},
 	};
 
 	if (Handlebars && typeof Handlebars.registerHelper === "function") {
@@ -28,4 +33,6 @@ var register = function (Handlebars) {
 
 module.exports.register = register;
 module.exports.repeat = repeat;
+module.exports.readSVG = readSVG;
+// module.exports.print = print;
 module.exports.helpers = register(null);
