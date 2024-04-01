@@ -1,0 +1,31 @@
+<div class="d-flex flex-row justify-content-between align-items-center">
+    <h1 class="flex-grow-1">Các cảm biến</h1>
+    {{> listViewButton}}
+    {{> normalButton content="+ Thêm cảm biến"}}
+</div>
+
+<div class="d-flex flex-column bg-white container-fluid" style="border: 1px solid black;">
+    <div class="d-flex align-items-center p-0 justify-content-between" style="gap: 24px; height: 40px;">
+        {{> searchBar}}
+        {{> dataList selections=selections}}
+    </div>
+    <div class="row row-cols-4 g-2" style="">
+        {{#each sensors}}
+        <div class="col p-2">
+            <div class="card">
+                <div class="d-flex flex-row justify-content-between align-items-center">
+                    <div class="">icon</div>
+                    <div class="">{{this.value}}</div>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                    {{!-- <p class="card-text">Ngưỡng an toàn trên: {{this.rangeUp}}</p>
+                    <p class="card-text">Ngưỡng an toàn dưới: {{this.rangeDown}}</p> --}}
+                    <p class="card-text">Vị trí: {{this.location}}</p>
+                    {{!-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
