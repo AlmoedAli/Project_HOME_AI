@@ -94,6 +94,28 @@ class SensorController {
 			});
 		}
 	}
+
+    index_modify(req, res, next) {
+        device.find({ Type: 'sensor' })
+            .then(devicesOb => {
+                const devices = devicesOb.map(device => {
+                    return {
+                        _id: device._id,
+                        name: device.Name,
+                        location: device.Location,
+                        type: device.Type,
+                        state: device.State,
+                        installationDate: device.InstallationDate,
+                        powerConsumption: device.PowerConsumption,
+                    }
+                })
+                res.render('user/sensor_modify', {
+                    layout: 'main',
+                    sensors: devices
+                })
+            })
+            .catch(next);
+    }
 }
 
 module.exports = new SensorController();
