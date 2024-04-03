@@ -10,24 +10,10 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
-                                Tên thiết bị: {{equipments.[0].Name}}
+                                Tên thiết bị: {{device.Name}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Loại thiết bị: {{equipments.[0].type}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-11">
-                        <div class="row">
-                            <div class="col-6 m-0 p-0 mt-2">
-                                Vị trí: {{equipments.[0].location}}
-                            </div>
-                            <div class="col-6 m-0 p-0 mt-2">
-                                Trạng thái: {{equipments.[0].state}}
+                                Loại thiết bị: {{equipment.ElectricityEqType}}
                             </div>
                         </div>
                     </div>
@@ -38,10 +24,24 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
+                                Vị trí: {{device.Location}}
+                            </div>
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Trạng thái: {{equipment.State}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            {{!-- <div class="col-6 m-0 p-0 mt-2">
                                 Công suất: 36W
-                            </div>
+                            </div> --}}
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ: Có
+                                Hẹn giờ: {{equipment.Timer.isTimer}}
                             </div>
                         </div>
                     </div>
@@ -52,10 +52,10 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ bật: 20:30
+                                Hẹn giờ bật: {{equipment.Timer.TimeTurnOn}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ tắt: 5:00
+                                Hẹn giờ tắt: {{equipment.Timer.TimeTurnOff}}
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                                 <button type="button" class="btn" style="background-color: #7E25CA; color: white; margin-right: 16px;">Xuất lịch sử</button>
                             </div>
                             <div class="col-auto p-0">
-                                <a href="/equipment_modify" type="button" class="btn" style="background-color: #7E25CA; color: white; margin-right: 16px;" > Chỉnh sửa </a>
+                                <a href="./edit" type="button" class="btn" style="background-color: #7E25CA; color: white; margin-right: 16px;" > Chỉnh sửa </a>
                                 {{!-- <button type="button" href="/equipment_modify" class="btn" style="background-color: #7E25CA; color: white; margin-right: 16px;">Chỉnh sửa</button> --}}
                             </div>
                             <div class="col-auto p-0">

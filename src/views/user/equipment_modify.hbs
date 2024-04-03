@@ -15,6 +15,7 @@
                     </div>
                 </div>
             </div>
+            <form method="post">
             <div class="row mt-3">
                 <div class="row d-flex justify-content-center">
                     <div class="col-11">
@@ -23,7 +24,7 @@
                                 Tên thiết bị: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4 ">
-                                <input name="EquipmentName" id="id1"  class="form-control form-control-sm" defaultValue={{equipments.[0].name}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{equipments.[0].name}}}>
+                                <input name="Name" id="id1"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge" value={{device.Name}} >
                                 </input>
                             </div>
                             
@@ -31,10 +32,8 @@
                                 Loại thiết bị: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="EquipmentType" id="id2"  class="form-select form-select-sm" defaultValue={{equipments.[0].type}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Đèn">Đèn</option>
-                                    <option value="Quạt">Quạt</option>
-                                </select>
+                                <input name="ElectricityEqType" id="id2"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge" value={{equipment.ElectricityEqType}}  readonly>
+                                </input>
                             </div>
                         </div>
                     </div>
@@ -48,21 +47,17 @@
                                 Vị trí: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="EquipmentLocation" id="id3"  class=" form-select form-select-sm" defaultValue={{equipments.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Phòng khách">Phòng khách</option>
-                                    <option value="Phòng ngủ">Phòng ngủ</option>
-                                    <option value="Phòng ăn">Phòng ăn</option>
-                                    <option value="Phòng bếp">Phòng bếp</option>
-                                </select>
+                                <input name="Location"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge" value="{{device.Location}}"  readonly>
+                                </input>
                             </div>
                             
                             <div class="col-2 m-0 p-0 mt-2">
                                 Trạng thái:                                
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">                            
-                                <select name="EquipmentState" id="id4"  class="form-select form-select-sm" defaultValue={{equipments.[0].state}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Bật">Bật</option>
-                                    <option value="Tắt">Tắt</option>
+                                <select name="State" id="id4"  class="form-select form-select-sm col-4 m-0 p-1 mt-0 mr-4ge" value={{equipment.State}}  >
+                                    <option value=true>Bật</option>
+                                    <option value=false>Tắt</option>
                                 </select>
                             </div>
                         </div>
@@ -74,20 +69,12 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-2 m-0 p-0 mt-2">
-                                Công suất: 
-                            </div>
-                            <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input name="EquipmentPowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{equipments.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{equipments.[0].location}}} >
-                                </input> 
-                            </div>
-                            
-                            <div class="col-2 m-0 p-0 mt-2">
                                 Hẹn giờ: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="EquipmentIsTimer" id="id6" class="form-select form-select-sm" defaultValue={{equipments.[0].state}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Có">Có</option>
-                                    <option value="Không">Không</option>
+                                <select name="isTimer" id="id6" class="form-select form-select-sm col-4 m-0 p-1 mt-0 mr-4ge" value={{equipment.Timer.isTimer}}  >
+                                    <option value=true>Có</option>
+                                    <option value=false>Không</option>
                                 </select>
                             </div>
 
@@ -104,7 +91,7 @@
 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input type="datetime-local" id="id7"  class="form-control form-control-sm" name="EquipmentTimerTurnOn" defaultValue={{equipments.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} >
+                                <input type="datetime-local" name="TimeTurnOn" id="id7"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value={{equipment.Timer.TimeTurnOn}} >
                                 </input>
                             </div>
                             
@@ -112,7 +99,7 @@
                                 Hẹn giờ tắt: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input type="datetime-local" id="id8"  class="form-control form-control-sm" name="EquipmentTimerTurnOff" defaultValue={{equipments.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} >
+                                <input type="datetime-local" id="id8" name="TimeTurnOff" class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value={{equipment.Timer.TimeTurnOff}}  >
                                 </input>
                             </div>
 
@@ -128,26 +115,13 @@
                                 <a href="/equipment" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;" > Huỷ bỏ </a>
                             </div>
                             <div class="col-auto p-0">
-                                <button type="button" onclick="saveData()" class="btn" style="background-color: #7E25CA; color: white">Lưu</button>
+                                <button type="submit"  class="btn" style="background-color: #7E25CA; color: white">Lưu</button>
                             </div>
                     </div>
                 </div>
             </div>
+            </form>
         </div>
     </div>
 </div>
 
-
-<script>
-    function saveData() {
-        input="id"
-        {{!-- const myList = [];
-        for (i=1;i<=8;i++){
-            input_src=input+i.toString()
-            console.log(input_src)
-            console.log(document.getElementById(input_src).value)
-        } --}}
-        
-        window.location.href = "/equipment";
-    }
-</script>

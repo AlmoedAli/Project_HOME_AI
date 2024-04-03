@@ -12,11 +12,6 @@ const EquipmentSchema = new mongoose.Schema(
             TimeTurnOn: {type: Date},
             TimeTurnOff: {type: Date},
         },
-        UsageHistory: {
-            UsageID: {type: Number},
-            UsageStartTime: {type: Date},
-            UsageEndTime: {type: Date},
-        }
     },
     {collection: 'equipment'}
 ) 

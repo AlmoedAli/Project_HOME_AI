@@ -1,33 +1,29 @@
 const equipment = require("../../models/equipment");
 const device = require("../../models/device");
+const { ObjectId } = require('mongodb');
+const usagehistory = require("../../models/usagehistory");
 
 class EquipmentController {
-	async getEquipments(req, res, next) {
-		let devices;
-		try {
-			devices = await device.find({ Type: "electricity" });
-		} catch (error) {
-			next(error);
-		}
+	async getEquipment(req, res, next) {
+		// let devices;
+		// try {
+		// 	devices = await device.find({ Type: "electricity" });
+		// } catch (error) {
+		// 	next(error);
+		// }
 
-		const equipments = devices.map((device) => {
-			return {
-				_id: device._id,
-				name: device.Name,
-				location: device.Location,
-				type: device.Type,
-				state: device.State,
-				installationDate: device.InstallationDate,
-				powerConsumption: device.PowerConsumption,
-			};
-		});
-
-		res.render("equipment/equipments", {
-			layout: "main",
-			equipments: equipments,
-			"equipment-active": true,
-			selections: [{ value: "Tên thiết bị" }, { value: "Loại thiết bị" }],
-		});
+		
+		const dev = (await device.findById(req.params.id)).toObject();
+        // console.log(dev)
+        const equip = (await equipment.findOne({DeviceID: req.params.id})).toObject();
+        // const histories = (await usagehistory.findOne({DeviceID: req.params.id} ,{},{ sort: { 'ReadingDateTime':-1} })).toObject();
+        // console.log(histories)
+        res.render("user/equipment_detail", {
+            layout: "main", 
+            device: dev, 
+            equipment: equip,
+            // history: histories
+        });
 	}
 
 	index(req, res, next) {
@@ -39,10 +35,7 @@ class EquipmentController {
 						_id: device._id,
 						name: device.Name,
 						location: device.Location,
-						type: device.Type,
-						state: device.State,
-						installationDate: device.InstallationDate,
-						powerConsumption: device.PowerConsumption,
+						type: device.Type
 					};
 				});
 				res.render("user/equipments", {
@@ -101,41 +94,33 @@ class EquipmentController {
 		}
 	}
 
-	index_modify(req, res, next) {
-		equipment
-			.find()
-			.then((equipmentsOb) => {
-				const equipments = equipmentsOb.map((equipment) => {
-					return {
-						_id: equipment._id,
-						name: equipment.Name,
-						location: equipment.Location,
-						type: equipment.Type,
-						state: equipment.State,
-						installationDate: equipment.InstallationDate,
-						powerConsumption: equipment.PowerConsumption,
-					};
-				});
-				res.render("user/equipment_modify", {
-					layout: "main",
-					equipments: equipments,
-				});
-			})
-			.catch(next);
+	async index_modify(req, res, next) {
+		const dev = (await device.findById(req.params.id)).toObject();
+		
+        console.log(dev)
+        const equip = (await equipment.findOne({DeviceID: req.params.id})).toObject();
+        // console.log(sen)
+                res.render('user/equipment_modify', {
+                    layout: 'main',
+                    device: dev,
+                    equipment:equip
+                })  
 	}
 
-	async modifyEquipment(req, res, next) {
-		try {
-			const result = await User.updateOne(
-				{ _id: userId },
-				{ age: newAge }
-			);
-		} catch (error) {
-			console.error("Error modifying equipments:", error);
-			res.status(500).json({
-				error: "An error occurred while modifying the equipments",
-			});
-		}
+	async equipment_modify(req, res, next) {
+		const data = req.body;
+		await device.findByIdAndUpdate(req.params.id, data);
+
+		var equipdata={
+			State: data.State,
+			Timer:{
+				isTimer : data.isTimer,
+				TimeTurnOn : data.TimeTurnOn,
+				TimeTurnOff : data.TimeTurnOff
+			}
+		} 
+		await equipment.findOneAndUpdate({DeviceID : req.params.id},equipdata)
+		res.redirect("/equipment")
 	}
 }
 

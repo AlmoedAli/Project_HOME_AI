@@ -33,7 +33,7 @@ class SensorController {
         const sen = (await sensor.findOne({DeviceID: req.params.id})).toObject();
         // console.log(sen)
         const histories = (await readinghistory.findOne({DeviceID: req.params.id} ,{},{ sort: { 'ReadingDateTime':-1} })).toObject();
-        console.log(histories)
+        // console.log(histories)
         res.render("user/sensor_detail", {
             layout: "main", 
             device: dev, 
