@@ -10,24 +10,10 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
-                                Tên cảm biến: {{sensors.Name}}
+                                Tên cảm biến: {{device.Name}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Loại cảm biến: {{sensors.Type}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row mt-1">
-                <div class="row d-flex justify-content-center">
-                    <div class="col-11">
-                        <div class="row">
-                            <div class="col-6 m-0 p-0 mt-2">
-                                Vị trí: {{sensors.Location}}
-                            </div>
-                            <div class="col-6 m-0 p-0 mt-2">
-                                Giá trị: {{sensors.State}}
+                                Loại cảm biến: {{sensor.SensorType}}
                             </div>
                         </div>
                     </div>
@@ -38,10 +24,24 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
-                                Ngưỡng an toàn: 40% - 80%
+                                Vị trí: {{device.Location}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Sai số: 0.5%
+                                Giá trị: {{history.ReadingValue}} {{sensor.Unit}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-1">
+                <div class="row d-flex justify-content-center">
+                    <div class="col-11">
+                        <div class="row">
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Ngưỡng an toàn: {{sensor.SafetyRange.LowerBound}} {{sensor.Unit}} - {{sensor.SafetyRange.UpperBound}} {{sensor.Unit}} 
+                            </div>
+                            <div class="col-6 m-0 p-0 mt-2">
+                                Sai số: {{sensor.Errors}}%
                             </div>
                         </div>
                     </div>

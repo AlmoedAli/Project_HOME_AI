@@ -24,7 +24,7 @@
                                 Tên cảm biến: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4 ">
-                                <input name="Name" id="id1"  class="form-control form-control-sm" defaultValue={{sensors.name}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].name}}}>
+                                <input name="Name" id="id1"  class="form-control form-control-sm  col-4 m-0 p-1 mt-0 mr-4ge" value={{device.Name}} >
                                 </input>
                             </div>
                             
@@ -32,10 +32,9 @@
                                 Loại cảm biến: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="Type" id="id2"  class="form-select form-select-sm" defaultValue={{sensors.type}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Nhiệt độ - Độ ẩm">Nhiệt độ - Độ ẩm</option>
-                                    <option value="Ánh sáng">Ánh sáng</option>
-                                </select>
+                                <input name="SensorType" id="id2"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge" value="{{sensor.SensorType}}"  readonly>
+ 
+                                </input>
                             </div>
                         </div>
                     </div>
@@ -49,26 +48,22 @@
                                 Vị trí: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="Location" id="id3"  class=" form-select form-select-sm" defaultValue={{sensors.location}} col-4 m-0 p-1 mt-0 mr-4ge} >
-                                    <option value="Phòng khách">Phòng khách</option>
-                                    <option value="Phòng ngủ">Phòng ngủ</option>
-                                    <option value="Phòng ăn">Phòng ăn</option>
-                                    <option value="Phòng bếp">Phòng bếp</option>
-                                </select>
+                                <input name="Location" id="id3"  class=" form-control form-control-sm  col-4 m-0 p-1 mt-0 mr-4ge" value="{{device.Location}}"  readonly>
+                                </input>
                             </div>
                             
                             <div class="col-2 m-0 p-0 mt-2">
                                 Ngưỡng trên:                                
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">                            
-                                <input name="PowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{sensors.location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{sensors.location}}} >
+                                <input name="UpperBound" id="id5"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value="{{sensor.SafetyRange.UpperBound}}" >
                                 </input>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            {{!-- <div class="row mt-1">
+            <div class="row mt-1">
                 <div class="row d-flex justify-content-center">
                     <div class="col-11">
                         <div class="row">
@@ -76,7 +71,7 @@
                                 Đơn vị tính: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input name="PowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{sensors.location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{sensors.location}}} >
+                                <input name="Unit" id="id5"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value="{{sensor.Unit}}" readonly>
                                 </input> 
                             </div>
                             
@@ -84,14 +79,14 @@
                                 Ngưỡng dưới: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input name="PowerConsumption" id="id6"  class="form-control form-control-sm"  defaultValue={{sensors.location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{sensors.location}}} >
+                                <input name="LowerBound" id="id6"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value="{{sensor.SafetyRange.LowerBound}}" >
                                 </input> 
                             </div>
 
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
 
             <div class="row justify-content-center">
                 <div class="col-11 m-0 mt-2 mb-3 justify-content-center">

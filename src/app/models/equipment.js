@@ -6,6 +6,7 @@ const EquipmentSchema = new mongoose.Schema(
     {
         DeviceID: {type: ObjectId, ref: 'Device'},
         ElectricityEqType: {type: String, required: true},
+        State: {type: Boolean, required: true},
         Timer: {
             isTimer: {type: Boolean},
             TimeTurnOn: {type: Date},

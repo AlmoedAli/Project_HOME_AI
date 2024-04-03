@@ -1,28 +1,9 @@
 const sensor = require("../../models/sensor");
 const device = require("../../models/device");
+const { ObjectId } = require('mongodb');
+const readinghistory = require("../../models/readinghistory");
 
 class SensorController {
-	// getSensors(req, res, next) {
-	// 	const devices = [];
-	// 	for (let i = 0; i < 10; i++)
-	// 		devices.push({
-	// 			name: "Cảm biến nhiệt độ",
-	// 			value: 30,
-	// 			location: "Phòng khách",
-	// 		});
-	// 	res.render("sensor/sensors", {
-	// 		layout: "main",
-	// 		sensors: devices,
-	// 		selections: [
-	// 			{ value: "Tên cảm biến" },
-	// 			{ value: "Loại cảm biến" },
-	// 			// { value: "c" },
-	// 			// { value: "d" },
-	// 			// { value: "e" },
-	// 			// { value: "f" },
-	// 		],
-	// 	});
-	// }
 
 	index(req, res, next) {
 		device
@@ -34,31 +15,31 @@ class SensorController {
 						name: device.Name,
 						location: device.Location,
 						type: device.Type,
-						state: device.State,
-						installationDate: device.InstallationDate,
-						powerConsumption: device.PowerConsumption,
+						state: device.State
 					};
 				});
 				res.render("user/sensors", {
 					layout: "main",
 					sensors: devices,
+
 				});
 			})
 			.catch(next);
 	}
 
 	async getSensor(req, res, next) {
-		// console.log(req.params.id)
-		device
-			.findById(req.params.id)
-			.then((devicesOb) => {
-				const devices = devicesOb.toObject();
-				res.render("user/sensor_detail", {
-					layout: "main",
-					sensors: devices,
-				});
-			})
-			.catch(next);
+		const dev = (await device.findById(req.params.id)).toObject();
+        // console.log(dev)
+        const sen = (await sensor.findOne({DeviceID: req.params.id})).toObject();
+        // console.log(sen)
+        const histories = (await readinghistory.findOne({DeviceID: req.params.id} ,{},{ sort: { 'ReadingDateTime':-1} })).toObject();
+        console.log(histories)
+        res.render("user/sensor_detail", {
+            layout: "main", 
+            device: dev, 
+            sensor: sen,
+            history: histories
+        });
 	}
 
 	async addNewSensor(req, res, next) {
@@ -109,31 +90,26 @@ class SensorController {
 		}
 	}
 
-    index_modify(req, res, next) {
-        device.find({ Type: 'sensor' })
-            .then(devicesOb => {
-                const devices = devicesOb.map(device => {
-                    return {
-                        _id: device._id,
-                        name: device.Name,
-                        location: device.Location,
-                        type: device.Type,
-                        state: device.State,
-                        installationDate: device.InstallationDate,
-                        powerConsumption: device.PowerConsumption,
-                    }
-                })
+    async index_modify(req, res, next) {
+        const dev = (await device.findById(req.params.id)).toObject();
+        // console.log(dev)
+        const sen = (await sensor.findOne({DeviceID: req.params.id})).toObject();
+        // console.log(sen)
                 res.render('user/sensor_modify', {
                     layout: 'main',
-                    sensors: devices
-                })
-            })
-            .catch(next);
+                    device: dev,
+                    sensor:sen
+                })       
     }
 
 	async sensor_modify(req, res, next) {
 		const data = req.body;
 		await device.findByIdAndUpdate(req.params.id, data);
+        var SafetyRange={
+            UpperBound : data.UpperBound,
+            LowerBound : data.LowerBound
+        }
+        await sensor.findOneAndUpdate({DeviceID: req.params.id}, {SafetyRange});
 		res.redirect("/sensor")
 	}
 }
