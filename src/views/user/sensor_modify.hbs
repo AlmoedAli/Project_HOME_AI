@@ -15,6 +15,7 @@
                     </div>
                 </div>
             </div>
+            <form method="post">
             <div class="row mt-3">
                 <div class="row d-flex justify-content-center">
                     <div class="col-11">
@@ -23,7 +24,7 @@
                                 Tên cảm biến: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4 ">
-                                <input name="SensorName" id="id1"  class="form-control form-control-sm" defaultValue={{Sensors.[0].name}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].name}}}>
+                                <input name="Name" id="id1"  class="form-control form-control-sm" defaultValue={{sensors.name}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].name}}}>
                                 </input>
                             </div>
                             
@@ -31,7 +32,7 @@
                                 Loại cảm biến: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="SensorType" id="id2"  class="form-select form-select-sm" defaultValue={{Sensors.[0].type}} col-4 m-0 p-1 mt-0 mr-4ge} >
+                                <select name="Type" id="id2"  class="form-select form-select-sm" defaultValue={{sensors.type}} col-4 m-0 p-1 mt-0 mr-4ge} >
                                     <option value="Nhiệt độ - Độ ẩm">Nhiệt độ - Độ ẩm</option>
                                     <option value="Ánh sáng">Ánh sáng</option>
                                 </select>
@@ -48,7 +49,7 @@
                                 Vị trí: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="SensorLocation" id="id3"  class=" form-select form-select-sm" defaultValue={{Sensors.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} >
+                                <select name="Location" id="id3"  class=" form-select form-select-sm" defaultValue={{sensors.location}} col-4 m-0 p-1 mt-0 mr-4ge} >
                                     <option value="Phòng khách">Phòng khách</option>
                                     <option value="Phòng ngủ">Phòng ngủ</option>
                                     <option value="Phòng ăn">Phòng ăn</option>
@@ -60,14 +61,14 @@
                                 Ngưỡng trên:                                
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">                            
-                                <input name="SensorPowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{Sensors.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].location}}} >
+                                <input name="PowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{sensors.location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{sensors.location}}} >
                                 </input>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row mt-1">
+            {{!-- <div class="row mt-1">
                 <div class="row d-flex justify-content-center">
                     <div class="col-11">
                         <div class="row">
@@ -75,7 +76,7 @@
                                 Đơn vị tính: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input name="SensorPowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{Sensors.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].location}}} >
+                                <input name="PowerConsumption" id="id5"  class="form-control form-control-sm"  defaultValue={{sensors.location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{sensors.location}}} >
                                 </input> 
                             </div>
                             
@@ -83,14 +84,14 @@
                                 Ngưỡng dưới: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input name="SensorPowerConsumption" id="id6"  class="form-control form-control-sm"  defaultValue={{Sensors.[0].location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{Sensors.[0].location}}} >
+                                <input name="PowerConsumption" id="id6"  class="form-control form-control-sm"  defaultValue={{sensors.location}} col-4 m-0 p-1 mt-0 mr-4ge} placeholder={{{sensors.location}}} >
                                 </input> 
                             </div>
 
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
             <div class="row justify-content-center">
                 <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
@@ -99,26 +100,12 @@
                                 <a href="/sensor" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;" > Huỷ bỏ </a>
                             </div>
                             <div class="col-auto p-0">
-                                <button type="button" onclick="saveData()" class="btn" style="background-color: #7E25CA; color: white">Lưu</button>
+                                <button type="submit" class="btn" style="background-color: #7E25CA; color: white">Lưu</button>
                             </div>
                     </div>
                 </div>
             </div>
         </div>
+        </form>
     </div>
 </div>
-
-
-<script>
-    function saveData() {
-        input="id"
-        {{!-- const myList = [];
-        for (i=1;i<=8;i++){
-            input_src=input+i.toString()
-            console.log(input_src)
-            console.log(document.getElementById(input_src).value)
-        } --}}
-        
-        window.location.href = "/sensor";
-    }
-</script>

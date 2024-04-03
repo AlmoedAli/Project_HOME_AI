@@ -6,11 +6,16 @@ const EquipmentSchema = new mongoose.Schema(
     {
         DeviceID: {type: ObjectId, ref: 'Device'},
         ElectricityEqType: {type: String, required: true},
+        Timer: {
+            isTimer: {type: Boolean},
+            TimeTurnOn: {type: Date},
+            TimeTurnOff: {type: Date},
+        },
         UsageHistory: {
+            UsageID: {type: Number},
             UsageStartTime: {type: Date},
             UsageEndTime: {type: Date},
         }
-        // PowerConsumped: {type: Number, required: true},
     },
     {collection: 'equipment'}
 ) 

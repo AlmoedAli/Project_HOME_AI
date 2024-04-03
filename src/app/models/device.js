@@ -7,8 +7,7 @@ const DeviceSchema = new mongoose.Schema(
         Location: {type: String, required: true},
         Type: {type: String, required: true},
         State: {type: Boolean, required: true},
-        InstallationDate: {type: Date, required: true},
-        PowerConsumption: {type: Number, required: true},
+        InstallationDate: {type: Date, required: true}
     },
     {collection: 'device'}
 ) 
