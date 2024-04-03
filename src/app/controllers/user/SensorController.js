@@ -2,27 +2,27 @@ const sensor = require("../../models/sensor");
 const device = require("../../models/device");
 
 class SensorController {
-	getSensors(req, res, next) {
-		const devices = [];
-		for (let i = 0; i < 10; i++)
-			devices.push({
-				name: "Cảm biến nhiệt độ",
-				value: 30,
-				location: "Phòng khách",
-			});
-		res.render("sensor/sensors", {
-			layout: "main",
-			sensors: devices,
-			selections: [
-				{ value: "Tên cảm biến" },
-				{ value: "Loại cảm biến" },
-				// { value: "c" },
-				// { value: "d" },
-				// { value: "e" },
-				// { value: "f" },
-			],
-		});
-	}
+	// getSensors(req, res, next) {
+	// 	const devices = [];
+	// 	for (let i = 0; i < 10; i++)
+	// 		devices.push({
+	// 			name: "Cảm biến nhiệt độ",
+	// 			value: 30,
+	// 			location: "Phòng khách",
+	// 		});
+	// 	res.render("sensor/sensors", {
+	// 		layout: "main",
+	// 		sensors: devices,
+	// 		selections: [
+	// 			{ value: "Tên cảm biến" },
+	// 			{ value: "Loại cảm biến" },
+	// 			// { value: "c" },
+	// 			// { value: "d" },
+	// 			// { value: "e" },
+	// 			// { value: "f" },
+	// 		],
+	// 	});
+	// }
 
 	index(req, res, next) {
 		device
@@ -39,7 +39,21 @@ class SensorController {
 						powerConsumption: device.PowerConsumption,
 					};
 				});
-				res.render("user/sensor", {
+				res.render("user/sensors", {
+					layout: "main",
+					sensors: devices,
+				});
+			})
+			.catch(next);
+	}
+
+	async getSensor(req, res, next) {
+		// console.log(req.params.id)
+		device
+			.findById(req.params.id)
+			.then((devicesOb) => {
+				const devices = devicesOb.toObject();
+				res.render("user/sensor_detail", {
 					layout: "main",
 					sensors: devices,
 				});
@@ -116,6 +130,12 @@ class SensorController {
             })
             .catch(next);
     }
+
+	async sensor_modify(req, res, next) {
+		const data = req.body;
+		await device.findByIdAndUpdate(req.params.id, data);
+		res.redirect("/sensor")
+	}
 }
 
 module.exports = new SensorController();

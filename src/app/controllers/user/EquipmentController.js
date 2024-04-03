@@ -45,7 +45,7 @@ class EquipmentController {
 						powerConsumption: device.PowerConsumption,
 					};
 				});
-				res.render("user/equipment", {
+				res.render("user/equipments", {
 					layout: "main",
 					equipments: devices,
 				});

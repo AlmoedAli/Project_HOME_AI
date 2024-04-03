@@ -6,11 +6,16 @@ const SensorSchema = new mongoose.Schema(
     {
         DeviceID: {type: ObjectId, ref: 'Device'},
         SensorType: {type: String, required: true},
+        Errors: {type: Number},
+        SafetyRange: {
+            UpperBound: {type: Number},
+            LowerBound: {type: Number},
+        },
         ReadingHistory: {
+            RecordID: {type: Number},
             ReadingDateTime: {type: Date},
             ReadingValue: {type: Number},
         }
-        // PowerConsumped: {type: Number, required: true},
     },
     {collection: 'sensor'}
 ) 

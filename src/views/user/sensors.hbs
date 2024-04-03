@@ -10,6 +10,7 @@
         {{> dataList selections=selections}}
     </div>
     <div class="row row-cols-4 g-2" style="">
+        
         {{#each sensors}}
         <div class="col p-2">
             <div class="card">
@@ -22,7 +23,7 @@
                     {{!-- <p class="card-text">Ngưỡng an toàn trên: {{this.rangeUp}}</p>
                     <p class="card-text">Ngưỡng an toàn dưới: {{this.rangeDown}}</p> --}}
                     <p class="card-text">Vị trí: {{this.location}}</p>
-                    {{!-- <a href="#" class="btn btn-primary">Go somewhere</a> --}}
+                    <a href="./sensor/{{this._id}}/" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>
