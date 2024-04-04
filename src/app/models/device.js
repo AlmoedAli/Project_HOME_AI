@@ -5,7 +5,8 @@ const DeviceSchema = new mongoose.Schema(
     {
         Name: {type: String, required: true},
         Location: {type: String, required: true},
-        Type: {type: String, required: true}
+        Type: {type: String, required: true},
+        IDada: Number
     },
     {collection: 'device'}
 ) 
