@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <form method="post">
+            <form name="equipform" method="post" onsubmit="return validate()">
             <div class="row mt-3">
                 <div class="row d-flex justify-content-center">
                     <div class="col-11">
@@ -24,7 +24,7 @@
                                 Tên thiết bị: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4 ">
-                                <input name="Name" id="id1"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge" value={{device.Name}} >
+                                <input name="Name" id="id1"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge" value={{device.Name}} required >
                                 </input>
                             </div>
                             
@@ -72,7 +72,7 @@
                                 Hẹn giờ: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <select name="isTimer" id="id6" class="form-select form-select-sm col-4 m-0 p-1 mt-0 mr-4ge" value={{equipment.Timer.isTimer}}  >
+                                <select name="isTimer" onchange="ShowHideTimer()" id="id6" class="form-select form-select-sm col-4 m-0 p-1 mt-0 mr-4ge" value={{equipment.Timer.isTimer}}  >
                                     <option value=true>Có</option>
                                     <option value=false>Không</option>
                                 </select>
@@ -82,7 +82,7 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-1">
+            <div class="row mt-1"  style="display: default;" id="Timer">
                 <div class="row d-flex justify-content-center">
                     <div class="col-11">
                         <div class="row">
@@ -91,7 +91,7 @@
 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input type="datetime-local" name="TimeTurnOn" id="id7"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value={{equipment.Timer.TimeTurnOn}} >
+                                <input type="datetime-local" name="TimeTurnOn" id="id7"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  >
                                 </input>
                             </div>
                             
@@ -99,7 +99,7 @@
                                 Hẹn giờ tắt: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input type="datetime-local" id="id8" name="TimeTurnOff" class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value={{equipment.Timer.TimeTurnOff}}  >
+                                <input type="datetime-local" id="id8" name="TimeTurnOff" class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  >
                                 </input>
                             </div>
 
@@ -108,6 +108,21 @@
                 </div>
             </div> 
 
+            <div class="row mt-1"  style="display: none;" id="ErrorMessage1">
+                <div class="col d-flex justify-content-center">
+                    <div id="input1-error"  style="color: #F80D0D;">Thời gian hẹn bật phải bé hơn thời gian hẹn tắt.</div>
+                </div>
+            </div>
+             <div class="row mt-1"  style="display: none;" id="ErrorMessage2">
+                <div class="col d-flex justify-content-center">
+                    <div id="input1-error"  style="color: #F80D0D;">Thời gian tắt phải lớn hơn thời gian hiện tại.</div>
+                </div>
+            </div>
+             <div class="row mt-1"  style="display: none;" id="ErrorMessage3">
+                <div class="col d-flex justify-content-center">
+                    <div id="input1-error"  style="color: #F80D0D;">Thời gian bật phải lớn hơn thời gian hiện tại.</div>
+                </div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
                     <div class="row justify-content-end">
@@ -115,7 +130,7 @@
                                 <a href="/equipment" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;" > Huỷ bỏ </a>
                             </div>
                             <div class="col-auto p-0">
-                                <button type="submit"  class="btn" style="background-color: #7E25CA; color: white">Lưu</button>
+                                <button type="submit"    class="btn" style="background-color: #7E25CA; color: white">Lưu</button>
                             </div>
                     </div>
                 </div>
@@ -124,4 +139,48 @@
         </div>
     </div>
 </div>
+<script>
+function ShowHideTimer(){
+    var isTimer=document.getElementById("id6")
+    var setTimer=document.getElementById("Timer")
+    var TimeTurnOn=document.getElementById("id7")
+    var TimeTurnOff=document.getElementById("id8")
+    if (isTimer.value === "true"){
+        setTimer.style.display="block"
+    }
+    else{
+        setTimer.style.display="none"
+        TimeTurnOn.value=""
+        TimeTurnOff.value=""
+    }
+}
 
+function validate(){
+    var TimeTurnOn=document.getElementById("id7")
+    var TimeTurnOff=document.getElementById("id8")
+    var Error1=document.getElementById("ErrorMessage1")
+    var Error2=document.getElementById("ErrorMessage2")
+    var Error3=document.getElementById("ErrorMessage3")
+    var TurnOn= new Date(TimeTurnOn.value)
+    var TurnOff= new Date(TimeTurnOff.value)
+    var curDate=new Date()
+    if (curDate>TurnOff){
+        Error2.style.display="block"
+        event.preventDefault()
+        return false;
+    }
+    else if (curDate>TurnOn){
+        Error3.style.display="block"
+        event.preventDefault()
+        return false;
+    }
+    else if(TurnOn<TurnOff){
+        return true;
+    }
+    else{
+        Error1.style.display="block"
+        event.preventDefault()
+        return false;
+    }
+}
+</script>

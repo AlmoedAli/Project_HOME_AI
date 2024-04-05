@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <form method="post">
+            <form name="senform" method="post" onsubmit="validate()">
             <div class="row mt-3">
                 <div class="row d-flex justify-content-center">
                     <div class="col-11">
@@ -24,7 +24,7 @@
                                 Tên cảm biến: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4 ">
-                                <input name="Name" id="id1"  class="form-control form-control-sm  col-4 m-0 p-1 mt-0 mr-4ge" value={{device.Name}} >
+                                <input name="Name" id="id1"  class="form-control form-control-sm  col-4 m-0 p-1 mt-0 mr-4ge" value={{device.Name}} required>
                                 </input>
                             </div>
                             
@@ -56,7 +56,7 @@
                                 Ngưỡng trên:                                
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">                            
-                                <input name="UpperBound" id="id5"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value="{{sensor.SafetyRange.UpperBound}}" >
+                                <input name="UpperBound" id="id5" type="number" class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value="{{sensor.SafetyRange.UpperBound}}" required>
                                 </input>
                             </div>
                         </div>
@@ -79,7 +79,7 @@
                                 Ngưỡng dưới: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input name="LowerBound" id="id6"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value="{{sensor.SafetyRange.LowerBound}}" >
+                                <input name="LowerBound" type="number" id="id6"  class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  value="{{sensor.SafetyRange.LowerBound}}"  required>
                                 </input> 
                             </div>
 
@@ -87,7 +87,11 @@
                     </div>
                 </div>
             </div>
-
+            <div class="row mt-1"  style="display: none;" id="ErrorMessage">
+                <div class="col d-flex justify-content-center">
+                    <div id="input1-error"  style="color: #F80D0D;"> Ngưỡng dưới phải bé hơn bằng ngưỡng trên.</div>
+                </div>
+            </div>
             <div class="row justify-content-center">
                 <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
                     <div class="row justify-content-end">
@@ -104,3 +108,19 @@
         </form>
     </div>
 </div>
+<script>
+function validate(){
+    var UpperBound=document.getElementById("id5")
+    var LowerBound=document.getElementById("id6")
+    var Error=document.getElementById("ErrorMessage")
+    var upper=parseInt(UpperBound.value)
+    var lower=parseInt(LowerBound.value)
+    {{!-- console.log(upper)
+    console.log(lower) --}}
+    if (lower >= upper){
+        Error.style.display="block"
+        event.preventDefault()
+        return false;
+    }
+}
+</script>
