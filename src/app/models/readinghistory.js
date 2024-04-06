@@ -5,7 +5,8 @@ const ReadingHistorySchema = new mongoose.Schema(
     {
         DeviceID: {type: ObjectId, ref: 'Device'},
         ReadingDateTime: {type: Date},
-        ReadingValue: {type: Number}
+        ReadingValue: {type: Number},
+        DataID: {type: String, required: true}
     },
     {collection: 'readinghistory'}
 ) 

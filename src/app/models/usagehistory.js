@@ -5,7 +5,8 @@ const UsageHistorySchema = new mongoose.Schema(
     {
         DeviceID: {type: ObjectId, ref: 'Device'},
         UsageStartTime: {type: Date},
-        UsageEndTime: {type: Date}
+        UsageEndTime: {type: Date},
+        DataID: {type: String, required: true}
     },
     {collection: 'usagehistory'}
 ) 

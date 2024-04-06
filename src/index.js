@@ -1,6 +1,8 @@
 const db = require("./config/db");
+const adafruit = require("./config/adafruit");
 
 db.connect();
+adafruit.getDataInterval();
 
 const express = require("express");
 
