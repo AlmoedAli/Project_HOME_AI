@@ -76,6 +76,9 @@ async function getData() {
         )
         .then(async response => {
             const resData = response.data;
+            // console.log("--------------------------------");
+            // console.log(resData);
+            // console.log("--------------------------------");
             if (device.Type == "sensor") {
                 var hists = await readinghistory.find({DeviceID: device._id});
                 const inDbData = new Set(hists.map(data => data.DataID));
@@ -131,11 +134,10 @@ function getDataInterval(interval) {
         var start = new Date().getTime();
         getData()
         .then(() => {
-            
+            var end = new Date().getTime();
+            console.log(`Fetched time: ${end - start} ms`);
         })
         .catch(err => {console.log("Fatch error");});
-        var end = new Date().getTime();
-        console.log(`Fetched time: ${end - start} ms`);
     }, interval);
 }
 
