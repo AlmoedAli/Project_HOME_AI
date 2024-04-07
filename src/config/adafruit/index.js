@@ -204,8 +204,12 @@ async function updateData() {
 
 function getDataInterval(intervalGet, intervalUpdate) {
     setInterval(() => {
+        var start = new Date().getTime();
         getData()
-        .then(() => {})
+        .then(() => {
+            var end = new Date().getTime();
+            console.log(`Get time: ${end - start} ms`);
+        })
         .catch(err => {console.log("Get error");});
     }, intervalGet)
     setInterval(() => {
@@ -213,7 +217,7 @@ function getDataInterval(intervalGet, intervalUpdate) {
         updateData()
         .then(() => {
             var end = new Date().getTime();
-            console.log(`Fetched time: ${end - start} ms`);
+            console.log(`Fetch time: ${end - start} ms`);
         })
         .catch(err => {console.log("Fetch error");});
     }, intervalUpdate);

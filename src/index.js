@@ -2,7 +2,7 @@ const db = require("./config/db");
 const adafruit = require("./config/adafruit");
 
 db.connect();
-adafruit.getDataInterval(20000, 5000);
+adafruit.getDataInterval(10000, 5000);
 
 const express = require("express");
 
