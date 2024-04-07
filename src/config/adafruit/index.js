@@ -143,7 +143,7 @@ async function updateData() {
                 if (hists.length > dataLimit) {
                     hists = hists.slice(0, dataLimit);
                 }
-                await Promise.all(hists.map(hist => hist.save()));
+                await Promise.all([...hists.map(hist => hist.save()), readinghistory.deleteMany({DeviceID: device._id, _id: {$nin: hists.map(hist => hist._id)}})]);
 
             } else if (device.Type == "electricity") {
                 // Find last used device from mongodb
@@ -180,7 +180,7 @@ async function updateData() {
                         if (hists.length > dataLimit) {
                             hists = hists.slice(0, dataLimit);
                         }
-                        await Promise.all(hists.map(hist => hist.save()));
+                        await Promise.all([...hists.map(hist => hist.save()), usagehistory.deleteMany({DeviceID: device._id, _id: {$nin: hists.map(hist => hist._id)}})]);
                     }
                 } else {
                     if (resData.length > 0) {
