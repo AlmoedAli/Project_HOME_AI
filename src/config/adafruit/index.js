@@ -75,6 +75,7 @@ function calculateUsageTime(data) {
 }
 
 async function getData() {
+    // Get all feeds from the server to check if there is new equipment connect
     const allFeeds = (await fetch(`${baseUrl}/groups?x-aio-key=${AIO_KEY}`).then((res) => res.json()))[0].feeds;
     allFeeds.forEach(async feed => {
         if (!NameTable[feed.name]) return;
@@ -106,6 +107,10 @@ async function getData() {
 			});
         }
     });
+}
+
+async function updateData() {
+    // Get feed data from each id and update to mongodb
     const devices = await device.find();
     devices.map(device => {
         axios.get(
@@ -115,7 +120,10 @@ async function getData() {
         .then(async response => {
             const resData = response.data;
             if (device.Type == "sensor") {
+                // Find matching history
                 var hists = await readinghistory.find({DeviceID: device._id});
+                
+                // Add new data to db, check if it is already in db to increase performance
                 const inDbData = new Set(hists.map(data => data.DataID));
                 if (resData.length > 0) {
                     for (const eachData of resData) {
@@ -136,19 +144,28 @@ async function getData() {
                     hists = hists.slice(0, dataLimit);
                 }
                 await Promise.all(hists.map(hist => hist.save()));
+
             } else if (device.Type == "electricity") {
-                var lastUsedDev = await usagehistory.findOne({DeviceID: device._id}, {}, {sort: {"UsageEndTime": -1}});
+                // Find last used device from mongodb
+                var hists = await usagehistory.find({ DeviceID: device._id}).sort({"UsageEndTime": -1});
+                var lastUsedDev = hists.shift();
                 if (lastUsedDev) {
+                    // If available (it also means that there are already data in mongodb)
                     var lastUsed = new Date(lastUsedDev.UsageEndTime);
+                    
+                    // Get data from ada from after data in mongodb
                     const lastAdaDate = resData.filter(data => new Date(data.created_at) >= lastUsed);
+
                     if (lastAdaDate.length > 0) {
                         var newDatas = calculateUsageTime(lastAdaDate);
+
+                        // If the end time of in mongo connect with start time in ada, it means the device is still running
                         if (lastUsed.getTime() === (new Date(newDatas[newDatas.length - 1].startTime)).getTime()) {
                             var lastNewData = newDatas.pop();
                             lastUsedDev.UsageEndTime = lastNewData.endTime
-                            await lastUsedDev.save();
+                            hists.unshift(lastUsedDev);
                         }
-                        var hists = await usagehistory.find({ Device: device._id});
+
                         if (newDatas.length > 0) {
                             for (const entry of newDatas) {
                                 const newData = new usagehistory({
@@ -159,6 +176,7 @@ async function getData() {
                                 hists.unshift(newData);
                             }
                         }
+                        
                         if (hists.length > dataLimit) {
                             hists = hists.slice(0, dataLimit);
                         }
@@ -178,32 +196,27 @@ async function getData() {
                     }
                     
                 }
-                
-                // if (resData.length > 0) {
-                //     for (const eachData of resData) {
-                //         
-                //     }
-                // }
-                // if (hists.length > dataLimit) {
-                //     hists = hists.slice(0, dataLimit);
-                // }
-                // await Promise.all(hists.map(hist => hist.save()));
             }
         })
         .catch(err => {console.log(err);});
     })
 }
 
-function getDataInterval(interval) {
+function getDataInterval(intervalGet, intervalUpdate) {
+    setInterval(() => {
+        getData()
+        .then(() => {})
+        .catch(err => {console.log("Get error");});
+    }, intervalGet)
     setInterval(() => {
         var start = new Date().getTime();
-        getData()
+        updateData()
         .then(() => {
             var end = new Date().getTime();
             console.log(`Fetched time: ${end - start} ms`);
         })
-        .catch(err => {console.log("Fatch error");});
-    }, interval);
+        .catch(err => {console.log("Fetch error");});
+    }, intervalUpdate);
 }
 
 module.exports = { getDataInterval };
