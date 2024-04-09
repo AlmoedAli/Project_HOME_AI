@@ -1,7 +1,7 @@
 const sensor = require("../../models/sensor");
 const device = require("../../models/device");
 const { ObjectId } = require('mongodb');
-const readinghistory = require("../../models/readinghistory");
+const readingHistory = require("../../models/readinghistory");
 
 class SensorController {
 
@@ -29,16 +29,27 @@ class SensorController {
 
 	async getSensor(req, res, next) {
 		const dev = (await device.findById(req.params.id)).toObject();
-        // console.log(dev)
         const sen = (await sensor.findOne({DeviceID: req.params.id})).toObject();
-        // console.log(sen)
-        const histories = (await readinghistory.findOne({DeviceID: req.params.id} ,{},{ sort: { 'ReadingDateTime':-1} })).toObject();
-        // console.log(histories)
+        const readinghistory = await readingHistory.find({ DeviceID: req.params.id });
+
+		var data = [];
+		readinghistory.forEach(item => {
+			const readingDateTime = new Date(item.ReadingDateTime);
+			const readingValue = item.ReadingValue;
+
+			const readingDate = readingDateTime.toLocaleDateString();
+
+			data.push({ date: readingDate, value: readingValue });
+		});
+
+		var sensorlabels = JSON.stringify(data.map(item => item.date));
+		var sensordata = JSON.stringify(data.map(item => item.value));
         res.render("user/sensor_detail", {
             layout: "main", 
             device: dev, 
             sensor: sen,
-            history: histories
+            sensorlabels: sensorlabels,
+			sensordata: sensordata,
         });
 	}
 
