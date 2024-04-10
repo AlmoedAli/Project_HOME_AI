@@ -70,7 +70,10 @@ function calculateUsageTime(data) {
             endTime = null;
         }
     }
-    result.push({startTime, endTime});
+    if (startTime !== null && endTime !== null) {
+        result.push({startTime, endTime});
+    }
+    
     return result;
 }
 
@@ -147,6 +150,7 @@ async function updateData() {
 
             } else if (device.Type == "electricity") {
                 // Find last used device from mongodb
+                // console.log(resData)
                 var hists = await usagehistory.find({ DeviceID: device._id}).sort({"UsageEndTime": -1});
                 var lastUsedDev = hists.shift();
                 if (lastUsedDev) {
@@ -158,7 +162,8 @@ async function updateData() {
 
                     if (lastAdaDate.length > 0) {
                         var newDatas = calculateUsageTime(lastAdaDate);
-
+                        console.log(lastAdaDate);
+                        if (newDatas.length == 0) return;
                         // If the end time of in mongo connect with start time in ada, it means the device is still running
                         if (lastUsed.getTime() === (new Date(newDatas[newDatas.length - 1].startTime)).getTime()) {
                             var lastNewData = newDatas.pop();
