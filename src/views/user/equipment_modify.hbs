@@ -99,7 +99,7 @@
                                 Hẹn giờ tắt: 
                             </div>
                             <div class="col-4 m-0 p-1 mt-0 mr-4  ">
-                                <input type="datetime-local" id="id8" name="TimeTurnOff" class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"  >
+                                <input type="datetime-local" id="id8" name="TimeTurnOff" class="form-control form-control-sm col-4 m-0 p-1 mt-0 mr-4ge"    >
                                 </input>
                             </div>
 
@@ -145,25 +145,38 @@ function ShowHideTimer(){
     var setTimer=document.getElementById("Timer")
     var TimeTurnOn=document.getElementById("id7")
     var TimeTurnOff=document.getElementById("id8")
+    var Error1=document.getElementById("ErrorMessage1")
+    var Error2=document.getElementById("ErrorMessage2")
+    var Error3=document.getElementById("ErrorMessage3")
+    {{!-- console.log("Show hide timer") --}}
     if (isTimer.value === "true"){
         setTimer.style.display="block"
     }
     else{
         setTimer.style.display="none"
-        TimeTurnOn.value=""
-        TimeTurnOff.value=""
+        TimeTurnOn.value="1970-01-01T101:00"
+        TimeTurnOff.value="1970-01-01T101:00"
+        Error2.style.display="none"
+        Error1.style.display="none"
+        Error3.style.display="none"
     }
 }
 
 function validate(){
     var TimeTurnOn=document.getElementById("id7")
     var TimeTurnOff=document.getElementById("id8")
+    var isTimer=document.getElementById("id6")
     var Error1=document.getElementById("ErrorMessage1")
     var Error2=document.getElementById("ErrorMessage2")
     var Error3=document.getElementById("ErrorMessage3")
     var TurnOn= new Date(TimeTurnOn.value)
     var TurnOff= new Date(TimeTurnOff.value)
     var curDate=new Date()
+    console.log (TimeTurnOn.value)
+    console.log(TimeTurnOff.value)
+    if ( isTimer.value=="false"){
+        return true
+    }
     if (curDate>TurnOff){
         Error2.style.display="block"
         event.preventDefault()
