@@ -172,6 +172,7 @@ async function updateData() {
                             } else {
                                 equip.State = false;
                                 await equip.save();
+                                lastUsedDev.UsageEndTime = new Date(lastAdaDate[0].created_at);
                             }
                         } else {
                             equip.State = false;
