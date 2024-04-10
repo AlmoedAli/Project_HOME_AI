@@ -13,7 +13,7 @@
         
         {{#each sensors}}
         <div class="col p-2">
-            <div class="card">
+            <div class="card app-shadow">
                 <div class="d-flex flex-row justify-content-between align-items-center">
                     <div class="">icon</div>
                     <div class="">{{this.value}}</div>
@@ -23,7 +23,7 @@
                     {{!-- <p class="card-text">Ngưỡng an toàn trên: {{this.rangeUp}}</p>
                     <p class="card-text">Ngưỡng an toàn dưới: {{this.rangeDown}}</p> --}}
                     <p class="card-text">Vị trí: {{this.location}}</p>
-                    <a href="./sensor/{{this._id}}/" class="btn btn-primary">Chi tiết</a>
+                    <a href="./sensor/{{this._id}}/" class="btn" style="background-color:#7E25CA; color: white">Chi tiết</a>
                 </div>
             </div>
         </div>

@@ -162,7 +162,7 @@ async function updateData() {
 
                     if (lastAdaDate.length > 0) {
                         var newDatas = calculateUsageTime(lastAdaDate);
-                        console.log(lastAdaDate);
+                        // console.log(lastAdaDate);
                         if (newDatas.length == 0) return;
                         // If the end time of in mongo connect with start time in ada, it means the device is still running
                         if (lastUsed.getTime() === (new Date(newDatas[newDatas.length - 1].startTime)).getTime()) {

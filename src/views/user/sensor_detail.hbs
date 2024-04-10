@@ -27,7 +27,7 @@
                                 Vị trí: {{device.Location}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Giá trị: {{history.ReadingValue}} {{sensor.Unit}}
+                                Giá trị: {{lastsensordata}} {{sensor.Unit}}
                             </div>
                         </div>
                     </div>
@@ -103,7 +103,7 @@
     const sensorData = {
         labels: sensorlabels,
         datasets: [{
-            label: 'time Data',
+            label: 'data',
             data: sensordata,
             fill: false,
             borderColor: '#7E25CA',
