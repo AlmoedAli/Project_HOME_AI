@@ -27,7 +27,7 @@
                                 Vị trí: {{device.Location}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Trạng thái: {{equipment.State}}
+                                Trạng thái: <span id="state"></span>
                             </div>
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                                 Công suất: 36W
                             </div> --}}
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ: {{equipment.Timer.isTimer}}
+                                Hẹn giờ: <span id="isTimer"></span>
                             </div>
                         </div>
                     </div>
@@ -52,10 +52,10 @@
                     <div class="col-11">
                         <div class="row">
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ bật: {{equipment.Timer.TimeTurnOn}}
+                                Hẹn giờ bật: <span id="timeTurnOnDisplay"></span>
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Hẹn giờ tắt: {{equipment.Timer.TimeTurnOff}}
+                                Hẹn giờ tắt: <span id="timeTurnOffDisplay"></span>
                             </div>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                             <div class="col-6 mt-2">
                                 <p>Tổng thời gian sử dụng</p>
                             </div>
-                            <div class="col-6 d-flex justify-content-end">
+                            {{!-- <div class="col-6 d-flex justify-content-end">
                                 <div class="form-group">
                                     <label for="dayDropdown"></label>
                                     <select class="form-control float-right" id="dayDropdown" style="width: 125px; border: 1px solid #ccc; border-radius: 8px;">
@@ -85,7 +85,7 @@
                                         <option value="7">7</option>
                                     </select>
                                 </div>
-                            </div>
+                            </div> --}}
                             <canvas id="timeLineChart" width="400" height="75"></canvas>
                         </div>
                     </div>
@@ -113,11 +113,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
+    var timedata = {{timedata}};
+    var timelabels = {{{timelabels}}};
     const timeData = {
-        labels: ['Mon', 'Tue', 'Web', 'Thu', 'Fri', 'Sat', 'Sun'],
+        labels: timelabels,
         datasets: [{
             label: 'time Data',
-            data: [12, 13, 12, 13, 12, 13, 14],
+            data: timedata,
             fill: false,
             backgroundColor: '#7E25CA',
             borderColor: '#7E25CA',
@@ -145,5 +147,35 @@
     };
 
     var timeLineChart = new Chart(document.getElementById('timeLineChart'), timeConfig);
+
+    var state = {{equipment.State}};
+    var stateDiv = document.getElementById('state');
+    if (state) {
+        stateDiv.innerText += "Bật";
+    } else {
+        stateDiv.innerText += "Tắt";
+    }
+
+    var isTimer = {{equipment.Timer.isTimer}};
+    var isTimerDiv = document.getElementById('isTimer');
+    if (isTimer) {
+        isTimerDiv.innerText += "Bật";
+
+        var timeTurnOnString = "{{equipment.Timer.TimeTurnOn}}";
+        var timeTurnOn = new Date(timeTurnOnString);
+        var turnOnHours = timeTurnOn.getHours();
+        var turnOnMinutes = timeTurnOn.getMinutes();
+        var timeTurnOnFormatted = ('0' + turnOnHours).slice(-2) + ':' + ('0' + turnOnMinutes).slice(-2);
+        document.getElementById('timeTurnOnDisplay').innerText = timeTurnOnFormatted;
+
+        var timeTurnOffString = "{{equipment.Timer.TimeTurnOff}}";
+        var timeTurnOff = new Date(timeTurnOffString);
+        var turnOffHours = timeTurnOff.getHours();
+        var turnOffMinutes = timeTurnOff.getMinutes();
+        var timeTurnOffFormatted = ('0' + turnOffHours).slice(-2) + ':' + ('0' + turnOffMinutes).slice(-2);
+        document.getElementById('timeTurnOffDisplay').innerText = timeTurnOffFormatted;
+    } else {
+        isTimerDiv.innerText += "Tắt";
+    }
 </script>
 

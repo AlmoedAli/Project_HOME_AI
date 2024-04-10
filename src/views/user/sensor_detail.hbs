@@ -55,9 +55,9 @@
                     <div class="col-11" style="border: 1px solid #ccc; padding: 10px; border-radius: 8px; box-shadow: 0 0 10px 1px #bebebe;">
                         <div class="row">
                             <div class="col-6 mt-2">
-                                <p>Độ ẩm trung bình</p>
+                                <p>Biểu đồ <span id="chartName"></span></p>
                             </div>
-                            <div class="col-6 d-flex justify-content-end">
+                            {{!-- <div class="col-6 d-flex justify-content-end">
                                 <div class="form-group">
                                     <label for="dayDropdown"></label>
                                     <select class="form-control float-right" id="dayDropdown" style="width: 125px; border: 1px solid #ccc; border-radius: 8px;">
@@ -71,8 +71,8 @@
                                         <option value="7">7</option>
                                     </select>
                                 </div>
-                            </div>
-                            <canvas id="humidityLineChart" width="400" height="75"></canvas>
+                            </div> --}}
+                            <canvas id="sensorLineChart" width="400" height="75"></canvas>
                         </div>
                     </div>
                 </div>
@@ -98,20 +98,22 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    const humidityData = {
-        labels: ['5', '6', '7', '8', '9', '10', '11','12','13','14','15','16'],
+    var sensordata = {{sensordata}};
+    var sensorlabels = {{{sensorlabels}}};
+    const sensorData = {
+        labels: sensorlabels,
         datasets: [{
             label: 'time Data',
-            data: [12, 13, 12, 13, 12, 13, 14, 12, 13, 12, 13, 12],
+            data: sensordata,
             fill: false,
             borderColor: '#7E25CA',
             tension: 0.1 
         }]
     };
 
-    const humidityConfig = {
+    const sensorConfig = {
         type: 'line',
-        data: humidityData,
+        data: sensorData,
         options: {
             scales: {
                 y: {
@@ -126,6 +128,10 @@
         }
     };
 
-    var humidityLineChart = new Chart(document.getElementById('humidityLineChart'), humidityConfig);
+    var sensorLineChart = new Chart(document.getElementById('sensorLineChart'), sensorConfig);
+
+    var chartName = '{{sensor.SensorType}}';
+    var chartNameDiv = document.getElementById('chartName');
+    chartNameDiv.innerText += chartName.toLocaleLowerCase();
 </script>
 

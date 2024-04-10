@@ -1,7 +1,7 @@
 const equipment = require("../../models/equipment");
 const device = require("../../models/device");
 const { ObjectId } = require('mongodb');
-const usagehistory = require("../../models/usagehistory");
+const usageHistory = require("../../models/usagehistory");
 
 class EquipmentController {
 	async getEquipment(req, res, next) {
@@ -16,13 +16,35 @@ class EquipmentController {
 		const dev = (await device.findById(req.params.id)).toObject();
         // console.log(dev)
         const equip = (await equipment.findOne({DeviceID: req.params.id})).toObject();
-        // const histories = (await usagehistory.findOne({DeviceID: req.params.id} ,{},{ sort: { 'ReadingDateTime':-1} })).toObject();
+        // const histories = (await usageHistory.findOne({DeviceID: req.params.id} ,{},{ sort: { 'ReadingDateTime':-1} })).toObject();
         // console.log(histories)
+		const usagehistory = await usageHistory.find({ DeviceID: req.params.id });
+
+		var data = [];
+		usagehistory.forEach(item => {
+			const startTime = new Date(item.UsageStartTime);
+			const endTime = new Date(item.UsageEndTime);
+
+			const startDate = startTime.toLocaleDateString();
+			const duration = (endTime - startTime) / (1000 * 60 * 60);
+
+			const existingEntry = data.find(entry => entry.date === startDate);
+
+			if (existingEntry) {
+				existingEntry.time += duration;
+			} else {
+				data.push({ date: startDate, time: duration });
+			}
+		});
+		var timelabels = JSON.stringify(data.map(item => item.date))
+		var timedata = JSON.stringify(data.map(item => item.time))
+
         res.render("user/equipment_detail", {
             layout: "main", 
             device: dev, 
             equipment: equip,
-            // history: histories
+            timelabels: timelabels,
+			timedata: timedata,
         });
 	}
 

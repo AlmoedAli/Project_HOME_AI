@@ -4,7 +4,7 @@
     {{> normalButton content="+ Thêm cảm biến"}}
 </div>
 
-<div class="d-flex flex-column bg-white container-fluid" style="border: 1px solid black;">
+<div class="d-flex flex-column bg-white container-fluid gray-border gap-24 border-radius-24" style="padding: 24px;">
     <div class="d-flex align-items-center p-0 justify-content-between" style="gap: 24px; height: 40px;">
         {{> searchBar}}
         {{> dataList selections=selections}}
@@ -23,7 +23,7 @@
                     {{!-- <p class="card-text">Ngưỡng an toàn trên: {{this.rangeUp}}</p>
                     <p class="card-text">Ngưỡng an toàn dưới: {{this.rangeDown}}</p> --}}
                     <p class="card-text">Vị trí: {{this.location}}</p>
-                    <a href="./sensor/{{this._id}}/" class="btn btn-primary">Go somewhere</a>
+                    <a href="./sensor/{{this._id}}/" class="btn btn-primary">Chi tiết</a>
                 </div>
             </div>
         </div>
