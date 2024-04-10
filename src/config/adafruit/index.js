@@ -70,6 +70,9 @@ function calculateUsageTime(data) {
             endTime = null;
         }
     }
+    if (startTime !== null && endTime == null) {
+        endTime = startTime;
+    }
     if (startTime !== null && endTime !== null) {
         result.push({startTime, endTime});
     }
