@@ -3,6 +3,21 @@ const device = require("../../models/device");
 const { ObjectId } = require('mongodb');
 const usageHistory = require("../../models/usagehistory");
 
+const axios = require('axios');
+
+if (process.env.NODE_ENV != 'production') {
+    require('dotenv').config()
+}
+
+axios.defaults.headers.common['X-AIO-Key'] = process.env.AIO_KEY;
+const baseUrl = `https://io.adafruit.com/api/v2/${process.env.AIO_USERNAME}`;
+
+const ValueTable = Object.freeze({
+    "Quạt": "40",
+    "Đèn": "1",
+    "Cửa": "1",
+});
+
 class EquipmentController {
 	async getEquipment(req, res, next) {
 		// let devices;
@@ -120,8 +135,6 @@ class EquipmentController {
 
 	async index_modify(req, res, next) {
 		const dev = (await device.findById(req.params.id)).toObject();
-		
-        console.log(dev)
         const equip = (await equipment.findOne({DeviceID: req.params.id})).toObject();
         // console.log(sen)
                 res.render('user/equipment_modify', {
@@ -133,18 +146,36 @@ class EquipmentController {
 
 	async equipment_modify(req, res, next) {
 		const data = req.body;
-		await device.findByIdAndUpdate(req.params.id, data);
-
+		const dev = await device.findByIdAndUpdate(req.params.id, data);
+		const state = data.State;
 		var equipdata={
-			State: data.State,
+			State: state,
 			Timer:{
 				isTimer : data.isTimer,
 				TimeTurnOn : data.TimeTurnOn,
 				TimeTurnOff : data.TimeTurnOff
 			}
 		} 
-		await equipment.findOneAndUpdate({DeviceID : req.params.id},equipdata)
-		res.redirect("/equipment")
+		const equip = await equipment.findOneAndUpdate({DeviceID : req.params.id},equipdata);
+		console.log(state);
+		if (state == "true") {
+			const data = {
+				value: ValueTable[equip.ElectricityEqType]
+			}
+			await axios.post(
+				`${baseUrl}/feeds/${dev.AdaID}/data`, data, {
+				}
+			)
+		} else {
+			const data = {
+				value: '0'
+			}
+			await axios.post(
+				`${baseUrl}/feeds/${dev.AdaID}/data`, data, {
+				}
+			)
+		}
+		res.redirect("/equipment");
 	}
 }
 
