@@ -162,10 +162,23 @@ async function updateData() {
                     
                     // Get data from ada from after data in mongodb
                     const lastAdaDate = resData.filter(data => new Date(data.created_at) >= lastUsed);
-
+                    
                     if (lastAdaDate.length > 0) {
+                        var equip = await equipment.findOne({DeviceID: device._id});
+                        if (parseInt(lastAdaDate[0].value) != 0) {
+                            if (new Date(lastAdaDate[0].created_at) - lastUsed < TURN_OFF_UPPERBOUND) {
+                                equip.State = true;
+                                await equip.save();
+                            } else {
+                                equip.State = false;
+                                await equip.save();
+                            }
+                        } else {
+                            equip.State = false;
+                            await equip.save();
+                        }
+
                         var newDatas = calculateUsageTime(lastAdaDate);
-                        // console.log(lastAdaDate);
                         if (newDatas.length == 0) return;
                         // If the end time of in mongo connect with start time in ada, it means the device is still running
                         if (lastUsed.getTime() === (new Date(newDatas[newDatas.length - 1].startTime)).getTime()) {
