@@ -22,6 +22,8 @@ class EquipmentController {
 
 		var data = [];
 		usagehistory.forEach(item => {
+			if (item.UsageStartTime == null || item.UsageEndTime == null)
+				return;
 			const startTime = new Date(item.UsageStartTime);
 			const endTime = new Date(item.UsageEndTime);
 

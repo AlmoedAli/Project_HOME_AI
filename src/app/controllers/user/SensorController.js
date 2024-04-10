@@ -34,6 +34,8 @@ class SensorController {
 
 		var data = [];
 		readinghistory.forEach(item => {
+			if (item.ReadingDateTime == null || item.ReadingValue == null)
+				return;
 			const readingDateTime = new Date(item.ReadingDateTime);
 			const readingValue = item.ReadingValue;
 
@@ -50,6 +52,7 @@ class SensorController {
             sensor: sen,
             sensorlabels: sensorlabels,
 			sensordata: sensordata,
+			lastsensordata: data[data.length - 1].value
         });
 	}
 
