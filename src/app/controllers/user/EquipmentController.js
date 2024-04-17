@@ -66,15 +66,25 @@ class EquipmentController {
 	}
 
 	index(req, res, next) {
-		device
-			.find({ Type: "electricity" })
+		equipment
+			.find()
+            .populate({
+                path: 'DeviceID',
+                match: {
+                    Type: "electricity"
+                }
+            })
 			.then((devicesOb) => {
 				const devices = devicesOb.map((device) => {
 					return {
-						_id: device._id,
-						name: device.Name,
-						location: device.Location,
-						type: device.Type
+						_id: device.DeviceID._id,
+						name: device.DeviceID.Name,
+						location: device.DeviceID.Location,
+						type: device.DeviceID.Type,
+                        adaID: device.DeviceID.AdaID,
+                        state: device.State,
+                        AIO_KEY: process.env.AIO_KEY,
+                        AIO_USERNAME: process.env.AIO_USERNAME,
 					};
 				});
 				res.render("user/equipments", {

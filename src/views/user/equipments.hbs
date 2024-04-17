@@ -18,12 +18,10 @@
             <div class="card app-shadow">
                 <div class="d-flex flex-row justify-content-between align-items-center">
                     <div class="">icon</div>
-                    {{> toggleSwitch state=this.state}}
+                    {{> toggleSwitch state=this.state id=this.adaID username=this.AIO_USERNAME key=AIO_KEY}}
                 </div>
                 <div class="card-body">
                     <h5 class="card-title">{{this.name}}</h5>
-                    {{!-- <p class="card-text">Ngưỡng an toàn trên: {{this.rangeUp}}</p>
-                    <p class="card-text">Ngưỡng an toàn dưới: {{this.rangeDown}}</p> --}}
                     <p class="card-text">Vị trí: {{this.location}}</p>
                     <a href="./equipment/{{this._id}}/" class="btn" style="background-color:#7E25CA; color: white">Chi tiết</a>
                 </div>

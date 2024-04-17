@@ -9,3 +9,4 @@ router.get("/:id/edit", equipmentController.index_modify);
 router.post("/:id/edit", equipmentController.equipment_modify);
 router.delete("/delete", equipmentController.deleteAllEquipments);
 module.exports = router;
+    
