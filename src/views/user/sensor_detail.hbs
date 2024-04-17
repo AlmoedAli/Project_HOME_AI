@@ -27,7 +27,7 @@
                                 Vị trí: {{device.Location}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Giá trị: {{lastsensordata}} {{sensor.Unit}}
+                                Giá trị: <span id="sensorValue">{{lastsensordata}} {{sensor.Unit}}</span>
                             </div>
                         </div>
                     </div>
@@ -133,5 +133,28 @@
     var chartName = '{{sensor.SensorType}}';
     var chartNameDiv = document.getElementById('chartName');
     chartNameDiv.innerText += chartName.toLocaleLowerCase();
+
 </script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.5.2/mqtt.min.js" integrity="sha512-CiPPr+F/BXJ5o+gA/OKGVuplGXlmXaO0yPB7jBC1UBSzY3UVGiuogYIXJJJJs8bZ7tXWhJew86eyM+HIMPLy+A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const mqttOptions = {
+        username: '{{AIO_USERNAME}}',
+        password: '{{AIO_KEY}}'
+    };
+
+    const client = mqtt.connect('mqtt://io.adafruit.com', mqttOptions);
+    client.setMaxListeners(15);
+    client.on('connect', function () {
+        console.log('Connected to Adafruit MQTT broker');
+        client_name = '{{AIO_USERNAME}}' + '/feeds/' + '{{device.AdaID}}'
+        client.subscribe(client_name);
+    });
+
+
+    client.on('message', function (topic, message) {
+        const sensorDataUpdate = JSON.parse(message.toString());
+        var sensorData = sensorDataUpdate;
+        document.getElementById("sensorValue").textContent = sensorData + ' {{sensor.Unit}}';
+    });
+</script>
