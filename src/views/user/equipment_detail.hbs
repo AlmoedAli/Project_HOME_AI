@@ -148,12 +148,11 @@
 
     var timeLineChart = new Chart(document.getElementById('timeLineChart'), timeConfig);
 
-    var state = {{equipment.State}};
     var stateDiv = document.getElementById('state');
     if (state) {
-        stateDiv.innerText += "Bật";
+        stateDiv.innerText = "Bật";
     } else {
-        stateDiv.innerText += "Tắt";
+        stateDiv.innerText = "Tắt";
     }
 
     var isTimer = {{equipment.Timer.isTimer}};
@@ -177,5 +176,32 @@
     } else {
         isTimerDiv.innerText += "Tắt";
     }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mqtt/5.5.2/mqtt.min.js" integrity="sha512-CiPPr+F/BXJ5o+gA/OKGVuplGXlmXaO0yPB7jBC1UBSzY3UVGiuogYIXJJJJs8bZ7tXWhJew86eyM+HIMPLy+A==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    const mqttOptions = {
+        username: '{{AIO_USERNAME}}',
+        password: '{{AIO_KEY}}'
+    };
+
+    const client = mqtt.connect('mqtt://io.adafruit.com', mqttOptions);
+    client.setMaxListeners(15);
+    client.on('connect', function () {
+        console.log('Connected to Adafruit MQTT broker');
+        client_name = '{{AIO_USERNAME}}' + '/feeds/' + '{{device.AdaID}}'
+        client.subscribe(client_name);
+    });
+
+
+    client.on('message', function (topic, message) {
+        const stateUpdate = JSON.parse(message.toString());
+        var stateDiv = document.getElementById('state');
+        if (stateUpdate == 1) {
+            stateDiv.innerText = "Bật";
+        } else {
+            stateDiv.innerText = "Tắt";
+        }
+    });
 </script>
 

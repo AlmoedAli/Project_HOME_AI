@@ -18,21 +18,13 @@ const ValueTable = Object.freeze({
     "Cửa": "1",
 });
 
+const AIO_USERNAME = process.env.AIO_USERNAME;
+const AIO_KEY = process.env.AIO_KEY;
+
 class EquipmentController {
 	async getEquipment(req, res, next) {
-		// let devices;
-		// try {
-		// 	devices = await device.find({ Type: "electricity" });
-		// } catch (error) {
-		// 	next(error);
-		// }
-
-		
 		const dev = (await device.findById(req.params.id)).toObject();
-        // console.log(dev)
         const equip = (await equipment.findOne({DeviceID: req.params.id})).toObject();
-        // const histories = (await usageHistory.findOne({DeviceID: req.params.id} ,{},{ sort: { 'ReadingDateTime':-1} })).toObject();
-        // console.log(histories)
 		const usagehistory = await usageHistory.find({ DeviceID: req.params.id });
 
 		var data = [];
@@ -62,6 +54,8 @@ class EquipmentController {
             equipment: equip,
             timelabels: timelabels,
 			timedata: timedata,
+			AIO_USERNAME: AIO_USERNAME,
+			AIO_KEY: AIO_KEY
         });
 	}
 
