@@ -3,6 +3,9 @@ const device = require("../../models/device");
 const { ObjectId } = require('mongodb');
 const readingHistory = require("../../models/readinghistory");
 
+const AIO_USERNAME = process.env.AIO_USERNAME;
+const AIO_KEY = process.env.AIO_KEY;
+
 class SensorController {
 
 	index(req, res, next) {
@@ -28,33 +31,43 @@ class SensorController {
 	}
 
 	async getSensor(req, res, next) {
-		const dev = (await device.findById(req.params.id)).toObject();
-        const sen = (await sensor.findOne({DeviceID: req.params.id})).toObject();
-        const readinghistory = await readingHistory.find({ DeviceID: req.params.id });
-
-		var data = [];
-		readinghistory.forEach(item => {
-			if (item.ReadingDateTime == null || item.ReadingValue == null)
-				return;
-			const readingDateTime = new Date(item.ReadingDateTime);
-			const readingValue = item.ReadingValue;
-
-			const readingDate = readingDateTime.toLocaleDateString();
-
-			data.push({ date: readingDate, value: readingValue });
-		});
-
-		var sensorlabels = JSON.stringify(data.map(item => item.date));
-		var sensordata = JSON.stringify(data.map(item => item.value));
-        res.render("user/sensor_detail", {
-            layout: "main", 
-            device: dev, 
-            sensor: sen,
-            sensorlabels: sensorlabels,
-			sensordata: sensordata,
-			lastsensordata: data[data.length - 1].value
-        });
+		try {
+			const dev = (await device.findById(req.params.id)).toObject();
+			const sen = (await sensor.findOne({ DeviceID: req.params.id })).toObject();
+	
+			const readinghistory = await readingHistory.find({ DeviceID: req.params.id });
+	
+			var data = [];
+			readinghistory.forEach(item => {
+				if (item.ReadingDateTime == null || item.ReadingValue == null)
+					return;
+				const readingDateTime = new Date(item.ReadingDateTime);
+				const readingValue = item.ReadingValue;
+	
+				const readingDate = readingDateTime.toLocaleDateString();
+	
+				data.push({ date: readingDate, value: readingValue });
+			});
+	
+			const sensorlabels = JSON.stringify(data.map(item => item.date));
+			const sensordata = JSON.stringify(data.map(item => item.value));
+	
+			res.render("user/sensor_detail", {
+				layout: "main",
+				device: dev,
+				sensor: sen,
+				sensorlabels: sensorlabels,
+				sensordata: sensordata,
+				lastsensordata: data[data.length - 1].value,
+				AIO_USERNAME: AIO_USERNAME,
+				AIO_KEY: AIO_KEY
+			});
+			
+		} catch (error) {
+			next(error);
+		}
 	}
+	
 
 	async addNewSensor(req, res, next) {
 		const { name, location, type, specificType, powerconsumption } =

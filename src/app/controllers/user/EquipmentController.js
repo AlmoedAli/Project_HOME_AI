@@ -3,21 +3,28 @@ const device = require("../../models/device");
 const { ObjectId } = require('mongodb');
 const usageHistory = require("../../models/usagehistory");
 
+const axios = require('axios');
+
+if (process.env.NODE_ENV != 'production') {
+    require('dotenv').config()
+}
+
+axios.defaults.headers.common['X-AIO-Key'] = process.env.AIO_KEY;
+const baseUrl = `https://io.adafruit.com/api/v2/${process.env.AIO_USERNAME}`;
+
+const ValueTable = Object.freeze({
+    "Quạt": "40",
+    "Đèn": "1",
+    "Cửa": "1",
+});
+
+const AIO_USERNAME = process.env.AIO_USERNAME;
+const AIO_KEY = process.env.AIO_KEY;
+
 class EquipmentController {
 	async getEquipment(req, res, next) {
-		// let devices;
-		// try {
-		// 	devices = await device.find({ Type: "electricity" });
-		// } catch (error) {
-		// 	next(error);
-		// }
-
-		
 		const dev = (await device.findById(req.params.id)).toObject();
-        // console.log(dev)
         const equip = (await equipment.findOne({DeviceID: req.params.id})).toObject();
-        // const histories = (await usageHistory.findOne({DeviceID: req.params.id} ,{},{ sort: { 'ReadingDateTime':-1} })).toObject();
-        // console.log(histories)
 		const usagehistory = await usageHistory.find({ DeviceID: req.params.id });
 
 		var data = [];
@@ -47,19 +54,31 @@ class EquipmentController {
             equipment: equip,
             timelabels: timelabels,
 			timedata: timedata,
+			AIO_USERNAME: AIO_USERNAME,
+			AIO_KEY: AIO_KEY
         });
 	}
 
 	index(req, res, next) {
-		device
-			.find({ Type: "electricity" })
+		equipment
+			.find()
+            .populate({
+                path: 'DeviceID',
+                match: {
+                    Type: "electricity"
+                }
+            })
 			.then((devicesOb) => {
 				const devices = devicesOb.map((device) => {
 					return {
-						_id: device._id,
-						name: device.Name,
-						location: device.Location,
-						type: device.Type
+						_id: device.DeviceID._id,
+						name: device.DeviceID.Name,
+						location: device.DeviceID.Location,
+						type: device.DeviceID.Type,
+                        adaID: device.DeviceID.AdaID,
+                        state: device.State,
+                        AIO_KEY: process.env.AIO_KEY,
+                        AIO_USERNAME: process.env.AIO_USERNAME,
 					};
 				});
 				res.render("user/equipments", {
@@ -120,8 +139,6 @@ class EquipmentController {
 
 	async index_modify(req, res, next) {
 		const dev = (await device.findById(req.params.id)).toObject();
-		
-        console.log(dev)
         const equip = (await equipment.findOne({DeviceID: req.params.id})).toObject();
         // console.log(sen)
                 res.render('user/equipment_modify', {
@@ -133,18 +150,36 @@ class EquipmentController {
 
 	async equipment_modify(req, res, next) {
 		const data = req.body;
-		await device.findByIdAndUpdate(req.params.id, data);
-
+		const dev = await device.findByIdAndUpdate(req.params.id, data);
+		const state = data.State;
 		var equipdata={
-			State: data.State,
+			State: state,
 			Timer:{
 				isTimer : data.isTimer,
 				TimeTurnOn : data.TimeTurnOn,
 				TimeTurnOff : data.TimeTurnOff
 			}
 		} 
-		await equipment.findOneAndUpdate({DeviceID : req.params.id},equipdata)
-		res.redirect("/equipment")
+		const equip = await equipment.findOneAndUpdate({DeviceID : req.params.id},equipdata);
+		console.log(state);
+		if (state == "true") {
+			const data = {
+				value: ValueTable[equip.ElectricityEqType]
+			}
+			await axios.post(
+				`${baseUrl}/feeds/${dev.AdaID}/data`, data, {
+				}
+			)
+		} else {
+			const data = {
+				value: '0'
+			}
+			await axios.post(
+				`${baseUrl}/feeds/${dev.AdaID}/data`, data, {
+				}
+			)
+		}
+		res.redirect("/equipment");
 	}
 }
 

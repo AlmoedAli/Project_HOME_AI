@@ -1,3 +1,18 @@
-<div class="toggle-switch" data-state={{state}}>
+<div class="toggle-switch" data-state="{{state}}" data-id="{{id}}" onclick="(async ()=>{
+    
+    let val
+    if(this.dataset.state == 'true') val = '0'
+    else val = '1'
+    const res = await axios.post(
+        `https://io.adafruit.com/api/v2/{{username}}/feeds/${this.dataset.id}/data`,
+        {value: val},
+        {headers: {
+            common: {
+                'X-AIO-Key': '{{key}}'
+            }
+        }},
+    )
+    this.dataset.state = res.data.value == '1' ? 'true' : 'false'
+})()">
     <div class="circle bg-white" style="width: 12px;"></div>
 </div>
