@@ -165,14 +165,22 @@
         var timeTurnOn = new Date(timeTurnOnString);
         var turnOnHours = timeTurnOn.getHours();
         var turnOnMinutes = timeTurnOn.getMinutes();
-        var timeTurnOnFormatted = ('0' + turnOnHours).slice(-2) + ':' + ('0' + turnOnMinutes).slice(-2);
+        var turnOnMonth = timeTurnOn.getMonth() + 1;
+        var turnOnDate = timeTurnOn.getDate();
+        var turnOnYear = timeTurnOn.getFullYear();
+        var timeTurnOnFormatted = ('0' + turnOnHours).slice(-2) + ':' + ('0' + turnOnMinutes).slice(-2) 
+                                 + ' ' + ('0' + turnOnDate).slice(-2) + '/' + ('0' + turnOnMonth).slice(-2) + '/' + ('0' + turnOnYear).slice(-2);
         document.getElementById('timeTurnOnDisplay').innerText = timeTurnOnFormatted;
 
         var timeTurnOffString = "{{equipment.Timer.TimeTurnOff}}";
         var timeTurnOff = new Date(timeTurnOffString);
         var turnOffHours = timeTurnOff.getHours();
         var turnOffMinutes = timeTurnOff.getMinutes();
-        var timeTurnOffFormatted = ('0' + turnOffHours).slice(-2) + ':' + ('0' + turnOffMinutes).slice(-2);
+        var turnOffMonth = timeTurnOff.getMonth() + 1;
+        var turnOffDate = timeTurnOff.getDate();
+        var turnOffYear = timeTurnOff.getFullYear();
+        var timeTurnOffFormatted = ('0' + turnOffHours).slice(-2) + ':' + ('0' + turnOffMinutes).slice(-2) 
+                                 + ' ' + ('0' + turnOffDate).slice(-2) + '/' + ('0' + turnOffMonth).slice(-2) + '/' + ('0' + turnOffYear).slice(-2);
         document.getElementById('timeTurnOffDisplay').innerText = timeTurnOffFormatted;
     } else {
         isTimerDiv.innerText += "Tắt";
