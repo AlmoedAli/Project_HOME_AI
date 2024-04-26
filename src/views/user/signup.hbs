@@ -1,0 +1,88 @@
+
+    <div class="row" style="width: 100%; height:100%;">
+        <div class="col-2"></div>
+        <div class="col-8" style=" display:flex; flex-direction:column; justify-content:space-around; align-items: center; ">
+            {{!-- <div class="col-12"> --}}
+                <div  style="width:100%; height:80%; display:flex; flex-direction:row;">
+                    <div class="col-8" style="background-color:white; border-bottom-left-radius:12px;  border-top-left-radius:12px;  display: flex; flex-direction: column; justify-content: space-around; align-items: center;">
+                          {{!-- <form >
+                            <div style="margin-bot: -10px;">Username:</div>
+                            <input></input>
+                            <div style="margin-bot: -10px;"  >Password:</div>
+                            <input></input>
+                        </form> --}}
+                        <div class="col-12" style="display:flex; flex-direction: column; align-items:center;">
+                            
+                            <form class="col-11" style=" display: flex; flex-direction: column;  align-items:center; " method="post"; onsubmit="validate()">
+                                <div style="color: #1100EE;  font-size:32px;">Create a new account </div>
+                                    {{!-- <fieldset class="border p-1"> --}}
+                                {{!-- <legend  class="float-none w-auto p-1" style="font-size:14px;">Password</legend> --}}
+                                <div class="col-12 m-1">
+                                    <div class= "col-2 " style="margin-left: 2%; margin-bottom:-2%; position:relative; background-color: white; color: #1100EE;font-size:14px;">    Full name</div>
+                                    <input name="fullname" type="text" class="col-12" style="border: 1.5px solid #1100EE;  border-radius:6px;" required>
+                                </div>
+
+                                <div class="col-12 m-1">
+                                    <div class= "col-2 " style="margin-left: 2%; margin-bottom:-2%; position:relative; background-color: white; color: #1100EE;font-size:14px;">    Card's ID</div>
+                                    <input name="cardID"   type="text" class="col-12" style="border: 1.5px solid #1100EE;  border-radius:6px;" required>
+                                </div>
+
+                                <div class="col-12 m-1">
+                                    <div class= "col-2 " style="margin-left: 2%; margin-bottom:-2%; position:relative; background-color: white; color: #1100EE;font-size:14px;">    Username</div>
+                                    <input name="username" type="text" class="col-12" style="border: 1.5px solid #1100EE;  border-radius:6px;" required>
+                                </div>
+                            
+                                {{!-- </fieldset> --}}
+
+                                {{!-- <fieldset class="border p-1"> --}}
+                                {{!-- <legend  class="float-none w-auto p-1" style="font-size:14px;">Password</legend> --}}
+                                <div class="col-12 m-1">    
+                                    <div  class= "col-2"  style="margin-left: 2%; margin-bottom:-2%; position:relative; background-color: white; color: #1100EE;font-size:14px;">    Password </div>
+                                    <input name="password" id="password1" type="password" class="col-12 "  style="border: 1.5px solid #1100EE;  border-radius:6px;" required>
+                                </div>
+
+                                <div class="col-12 m-1">
+                                    <div class= "col-4 " style="margin-left: 2%; margin-bottom:-2%; position:relative; background-color: white; color: #1100EE;font-size:14px;">    Confirm password</div>
+                                    <input id="password2" type="password" class="col-12" style="border: 1.5px solid #1100EE;  border-radius:6px;" required>
+                                </div>
+                                {{!-- </fieldset> --}}
+                            
+                            
+
+                            <button type="submit"  class="btn col-3 m-1" style="background-color: #1100EE; border-color: white; border-radius:24px; color:white"  >Sign up</button>
+                               <div style="display: {{isfalse}}; color: #F80D0D;" id="ErrorMessage" > Username already in use</div>
+                                <div style="display: none; color: #F80D0D;" id="ErrorMessagePass" >Password and confirm password not match</div>
+                           </form>
+                        </div>
+                    </div>
+                    <div class="col-4" style="background-image: linear-gradient(to top,#170118, #380458, #110AB7); border-bottom-right-radius:12px;  border-top-right-radius:12px; display: flex; flex-direction: column; justify-content: center; align-items: center; padding:24px;">
+                        <div style="display:flex; flex-direction: column; justify-content: space-around; align-items:center; ">
+                            <h5 class="m-3" style="color: white;">Already a user?</h5>
+                            <div  style="color: white; text-align: center; font-size:13px;">Press the button below to sign in</div>
+                            <a href="/login" type="button" class="btn m-4 col-6" style="background-color: #380458; border-color: white; border-radius:24px; color:white"> Sign in </a>    
+                        </div>
+                        
+                    </div>
+                   
+                </div>
+                    
+        </div> 
+        <div class="col-2"></div>
+    </div>
+<script>
+    function validate(){
+         var password1=document.getElementById("password1")
+        var password2=document.getElementById("password2")
+        var Error=document.getElementById("ErrorMessagePass")
+        {{!-- console.log(password1.value)
+        console.log(password2.value) --}}
+        if (password1.value != password2.value){
+            Error.style.display="block"
+            event.preventDefault()
+            return false;
+        }
+        else{
+             Error.style.display="none"
+        }
+    }
+</script>
