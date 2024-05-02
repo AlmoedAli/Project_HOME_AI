@@ -3,7 +3,8 @@ const { ObjectId } = require('mongodb');
 
 const NotificationSchema = new mongoose.Schema(
     {
-        Name: {type: String, required: true},
+        Type: {type: String, required: true},
+        Time: {type: Date, required: true},
     },
     {collection: 'notification'}
 ) 
