@@ -1,0 +1,98 @@
+
+<div class="d-flex flex-row justify-content-between align-items-center">
+    <h1 class="flex-grow-1">Thông báo giá trị cảm biến vượt ngưỡng</h1>
+</div>
+<div class="d-flex flex-column bg-white container-fluid gray-border border-radius-24 app-shadow" style="padding: 24px; width: 50%;">
+    <div class="row mb-0">
+        <div class="col-1 p-2 mb-0">
+        </div>
+        <div class="col-5 p-2 mb-0">
+            <p class="m-0">Tên cảm biến:</p>
+        </div>
+        <div class="col-6 p-2 mb-0">
+            <p class="m-0">EG-520 224 chưa có chỗ này</p>
+        </div>
+    </div>
+    <div class="row mb-0">
+        <div class="col-1 p-2 mb-0">
+        </div>
+        <div class="col-5 p-2 mb-0">
+            <p class="m-0">Loại cảm biến:</p>
+        </div>
+        <div class="col-6 p-2 mb-0">
+            <p class="m-0">{{detail.SensorType}}</p>
+        </div>
+    </div>
+    <div class="row mb-0">
+        <div class="col-1 p-2 mb-0">
+        </div>
+        <div class="col-5 p-2 mb-0">
+            <p class="m-0">Vị trí:</p>
+        </div>
+        <div class="col-6 p-2 mb-0">
+            <p class="m-0">{{dev.Location}}</p>
+        </div>
+    </div>
+    <div class="row mb-0">
+        <div class="col-1 p-2 mb-0">
+        </div>
+        <div class="col-5 p-2 mb-0">
+            <p class="m-0">Ngưỡng an toàn:</p>
+        </div>
+        <div class="col-6 p-2 mb-0">
+            <p class="m-0">{{detail.SafetyRange.LowerBound}}{{detail.Unit}} - {{detail.SafetyRange.UpperBound}}{{detail.Unit}}</p>
+        </div>
+    </div>
+    <div class="row mb-0">
+        <div class="col-1 p-2 mb-0">
+        </div>
+        <div class="col-5 p-2 mb-0">
+            <p class="m-0">Giá trị ghi nhận:</p>
+        </div>
+        <div class="col-6 p-2 mb-0">
+            <p class="m-0">chưa có chỗ này</p>
+        </div>
+    </div>
+    <div class="row mb-0">
+        <div class="col-1 p-2 mb-0">
+        </div>
+        <div class="col-5 p-2 mb-0">
+            <p class="m-0">Thời gian ghi nhận:</p>
+        </div>
+        <div class="col-6 p-2 mb-0">
+            <p class="m-0" id="notitime">{{noti.Time}}</p>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
+            <div class="row justify-content-end">
+                    <div class="col-auto p-0">
+                        <a href="" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;"> Xóa </a>
+                    </div>
+                    <div class="col-auto p-0">
+                        <button type="submit" class="btn" 
+                        style="background-color: #7E25CA; color: white"
+                        onclick="redirectToNotifications()">Đã xem</button>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function redirectToNotifications() {
+        window.location.href = window.location.origin + "/notification";
+    }
+</script>
+
+<script>
+    var timeTurnOnString = "{{noti.Time}}";
+    var timeTurnOn = new Date(timeTurnOnString);
+    var turnOnHours = timeTurnOn.getHours();
+    var turnOnMinutes = timeTurnOn.getMinutes();
+    var turnOnMonth = timeTurnOn.getMonth() + 1;
+    var turnOnDate = timeTurnOn.getDate();
+    var turnOnYear = timeTurnOn.getFullYear();
+    var timeTurnOnFormatted = ('0' + turnOnHours).slice(-2) + ':' + ('0' + turnOnMinutes).slice(-2) + ' ' + ('0' + turnOnDate).slice(-2) + '/' + ('0' + turnOnMonth).slice(-2) + '/20' + ('0' + turnOnYear).slice(-2);
+    document.getElementById('notitime').innerText = timeTurnOnFormatted;
+</script>

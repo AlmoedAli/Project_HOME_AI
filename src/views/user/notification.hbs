@@ -17,7 +17,7 @@
     </div>
 
     {{#each notifications}}
-    <div class="row mb-0 notification">
+    <div class="row mb-0 notification" onclick="redirectToNotification('{{_id}}')">
         <div class="col-1 p-2 mb-0">
         </div>
         <div class="col-6 p-2 mb-0">
@@ -27,6 +27,7 @@
             <p class="m-0 notitime">{{time}}</p>
         </div>
         <div class="col-2 p-2 mb-0">
+            
         </div>
     </div>
     {{/each}}
@@ -35,6 +36,12 @@
 <script>
     function isWarning(type) {
         return type.includes("vượt ngưỡng");
+    }
+</script>
+
+<script>
+    function redirectToNotification(id) {
+        window.location.href = "./notification/" + id + "/";
     }
 </script>
 
@@ -65,149 +72,3 @@
         }
     });
 </script>
-
-{{!-- <div class="d-flex flex-row justify-content-between align-items-center">
-    <h1 class="flex-grow-1">Thông báo giá trị cảm biến vượt ngưỡng</h1>
-</div>
-<div class="d-flex flex-column bg-white container-fluid gray-border border-radius-24 app-shadow" style="padding: 24px; width: 50%;">
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Tên cảm biến:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">EG-520 224</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Loại cảm biến:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">Độ ẩm</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Vị trí:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">Phòng khách</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Ngưỡng an toàn:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">40% - 80%</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Giá trị ghi nhận:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">90%</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Thời gian ghi nhận:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">12:39 - 12/03/2024</p>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
-            <div class="row justify-content-end">
-                    <div class="col-auto p-0">
-                        <a href="" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;"> Xóa </a>
-                    </div>
-                    <div class="col-auto p-0">
-                        <button type="submit" class="btn" style="background-color: #7E25CA; color: white">Đã xem</button>
-                    </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
-
-{{!-- <div class="d-flex flex-row justify-content-between align-items-center">
-    <h1 class="flex-grow-1">Thông báo trạng thái hoạt động thiết bị</h1>
-</div>
-<div class="d-flex flex-column bg-white container-fluid gray-border border-radius-24 app-shadow" style="padding: 24px; width: 50%;">
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Tên thiết bị:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">DOUBLEWING 224</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Loại thiết bị:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">Đèn</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Vị trí:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">Phòng khách</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Trạng thái:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">Bật</p>
-        </div>
-    </div>
-    <div class="row mb-0">
-        <div class="col-1 p-2 mb-0">
-        </div>
-        <div class="col-5 p-2 mb-0">
-            <p class="m-0">Thời gian ghi nhận:</p>
-        </div>
-        <div class="col-6 p-2 mb-0">
-            <p class="m-0">12:39 - 12/03/2024</p>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
-            <div class="row justify-content-end">
-                    <div class="col-auto p-0">
-                        <a href="" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;"> Xóa </a>
-                    </div>
-                    <div class="col-auto p-0">
-                        <button type="submit" class="btn" style="background-color: #7E25CA; color: white">Đã xem</button>
-                    </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
