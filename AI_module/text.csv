@@ -97,3 +97,19 @@ DOOR_OPEN,open door please
 DOOR_OPEN,you must open door
 DOOR_OPEN,door is openned
 DOOR_OPEN,help me open the door
+DOOR_OPEN,open the door
+LED_ON,turn on the light
+LED_ON,on the light
+LED_ON,turn on the lamp
+LED_ON,on the lamp
+FAN_20,turn on the fan 20%
+FAN_20,turn on the fan 20
+FAN_40,turn on the fan 40%
+FAN_40,turn on the fan 40
+FAN_60,turn on the fan 60%
+FAN_60,turn on the fan 60
+FAN_80,turn on the fan 80%
+FAN_80,turn on the fan 80
+FAN_100,turn on the fan 100%
+FAN_100,turn on the fan 100
+FAN_100,turn on the fan maximum
