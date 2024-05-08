@@ -13,7 +13,7 @@ class LoginController {
         // console.log(finduser);
         if(finduser!=null)
         {   if(!finduser.isadmin){
-                req.session.user = user;
+                req.session.user = finduser;
                 req.session.user.role = 'user';
                 res.redirect('/')
             }
