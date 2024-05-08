@@ -98,13 +98,13 @@
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    var sensordata = {{sensordata}};
+    var sensordatas = {{sensordata}};
     var sensorlabels = {{{sensorlabels}}};
     const sensorData = {
         labels: sensorlabels,
         datasets: [{
             label: 'data',
-            data: sensordata,
+            data: sensordatas,
             fill: false,
             borderColor: '#7E25CA',
             tension: 0.1 
@@ -154,7 +154,17 @@
 
     client.on('message', function (topic, message) {
         const sensorDataUpdate = JSON.parse(message.toString());
-        var sensorData = sensorDataUpdate;
-        document.getElementById("sensorValue").textContent = sensorData + ' {{sensor.Unit}}';
+        var senData = sensorDataUpdate;
+        document.getElementById("sensorValue").textContent = senData + ' {{sensor.Unit}}';
+
+        sensordatas.shift()
+        sensorlabels.shift()
+
+        sensordatas.push(senData);
+        var today = new Date();
+        var formattedDate = (today.getMonth() + 1) + '/' + today.getDate() + '/' + today.getFullYear();
+        sensorlabels.push(formattedDate);
+
+        sensorLineChart.update();
     });
 </script>
