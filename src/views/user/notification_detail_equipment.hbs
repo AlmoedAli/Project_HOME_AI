@@ -53,25 +53,31 @@
             <p class="m-0" id="notitime">{{noti.Time}}</p>
         </div>
     </div>
-    <div class="row justify-content-center">
-        <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
-            <div class="row justify-content-end">
-                    <div class="col-auto p-0">
-                        <a href="" type="button" class="btn" style="background-color: #F80D0D; color: white; margin-right: 16px;"> Xóa </a>
-                    </div>
-                    <div class="col-auto p-0">
-                        <button type="submit" class="btn" 
-                        style="background-color: #7E25CA; color: white"
-                        onclick="redirectToNotifications()">Đã xem</button>
-                    </div>
+        <div class="row justify-content-center">
+            <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
+                <div class="row justify-content-end">
+                        <div class="col-auto p-0">
+                            <button type="button" class="btn" id="delete-noti" style="background-color: #F80D0D; color: white; margin-right: 16px;"> Xóa </button>
+                        </div>
+
+                        <form method="post">
+                            <div class="col-auto p-0">
+                                <button type="submit" class="btn" style="background-color: #7E25CA; color: white">Đã xem</button>
+                            </div>
+                        </form>
+                </div>
             </div>
         </div>
-    </div>
 </div>
 
+<form id="delete-noti-form" method="post"></form>
 <script>
-    function redirectToNotifications() {
-        window.location.href = window.location.origin + "/notification";
+    var deleteForm = document.forms['delete-noti-form'];
+    var deleteBtn = document.getElementById('delete-noti');
+    var deleteId = `{{noti._id}}`;
+    deleteBtn.onclick = function() {
+        deleteForm.action = '/notification/' + deleteId + '?_method=delete';
+        deleteForm.submit();
     }
 </script>
 

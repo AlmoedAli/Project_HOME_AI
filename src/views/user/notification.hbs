@@ -27,7 +27,7 @@
             <p class="m-0 notitime">{{time}}</p>
         </div>
         <div class="col-2 p-2 mb-0">
-            
+            <p class="m-0 notiseen">{{seen}}</p>
         </div>
     </div>
     {{/each}}
@@ -58,6 +58,16 @@
         var turnOnYear = timeTurnOn.getFullYear();
         var timeTurnOnFormatted = ('0' + turnOnHours).slice(-2) + ':' + ('0' + turnOnMinutes).slice(-2) + ' - ' + ('0' + turnOnDate).slice(-2) + '/' + ('0' + turnOnMonth).slice(-2) + '/20' + ('0' + turnOnYear).slice(-2);
         notification.querySelector('.notitime').innerText = timeTurnOnFormatted;
+        
+         var notiseen = notification.querySelector('.notiseen').innerText;
+         if (notiseen == "true") {
+            notification.style.backgroundColor = 'white';
+            notification.querySelector('.notiseen').innerText = "";
+         } 
+         else {
+            notification.style.backgroundColor = 'lightblue';
+            notification.querySelector('.notiseen').innerText = "";
+         }
     });
 </script>
 
