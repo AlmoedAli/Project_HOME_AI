@@ -4,6 +4,6 @@ const { isAuthenticated } = require('../../middlewares/session');
 
 const homepageController = require('../../app/controllers/user/HomePageController')
 
-router.get('/', isAuthenticated, homepageController.index);
+router.get('/', homepageController.index);
 
 module.exports = router;
