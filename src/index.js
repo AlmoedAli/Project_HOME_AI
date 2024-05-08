@@ -1,8 +1,10 @@
 const db = require("./config/db");
 const adafruit = require("./config/adafruit");
+const noti = require("./config/notification");
 
 db.connect();
 adafruit.getDataInterval(10000, 5000);
+noti.watcher();
 
 const express = require("express");
 
