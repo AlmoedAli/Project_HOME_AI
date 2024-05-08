@@ -12,6 +12,7 @@ class NotificationController {
                 _id: notification._id,
                 type: notification.Type,
                 time: notification.Time,
+                seen: notification.Seen,
             };
         });
         res.render('user/notification', {
@@ -49,6 +50,16 @@ class NotificationController {
 		} catch (error) {
 			next(error);
 		}
+	}
+
+    async notification_modify(req, res, next) {
+        await notification.findOneAndUpdate({_id: req.params.id}, {$set: {Seen: true}});
+		res.redirect("/notification")
+	}
+
+    async delete_notification(req, res, next) {
+        await notification.findOneAndDelete({ _id: req.params.id });
+		res.redirect("/notification")
 	}
 }
 
