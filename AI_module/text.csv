@@ -1,0 +1,115 @@
+label,description
+LED_ON,hmm turn on the light
+LED_ON,oke light is turned on
+LED_ON,oke turn on the light
+LED_ON,hey you turn on the light now
+LED_ON,assistant let turn off light
+LED_OFF,the light enough turn off the light
+LED_OFF,you must turn off the light
+LED_OFF,oke turn off light
+LED_OFF,hey you turn off the light now
+LED_OFF,let turn off the light right
+DOOR_OPEN,help me open the door
+DOOR_OPEN,open the door
+DOOR_OPEN,open door
+DOOR_OPEN,hey you open the door
+DOOR_OPEN,hey you open the door now
+DOOR_OPEN,hey you open this door now
+DOOR_OPEN,can you open the door
+DOOR_CLOSE,hello close the door
+DOOR_CLOSE,can you close the door 
+DOOR_CLOSE,at aight you must close the door
+DOOR_CLOSE,you should be closing the door
+DOOR_CLOSE,close the door right now please
+DOOR_CLOSE,oke close the door
+DOOR_CLOSE,let close the door in this room
+DOOR_CLOSE,close the door to maintain the room temperature
+DOOR_CLOSE,do not forget to close the door before going to bed
+DOOR_CLOSE,to keep the room private please close the door
+FAN_OFF,turn off the fan
+FAN_OFF,help me turn off the fan
+FAN_OFF,turn off the fan before leaving the room
+FAN_OFF,turn off the fan to save energy
+FAN_OFF,hey you turn off the fan
+FAN_OFF,turn off the fan right now
+FAN_OFF,hell turn off the fan
+FAN_20,turn on the fan with speed 20
+FAN_20,help me turn on the fan 20
+FAN_20,turn on the fan 20 now
+FAN_20,hello turn on fan 20
+FAN_20,hello turn on fan with speed 20 now
+FAN_20,hmmmm turn on 20 fan
+FAN_20,can you turn on the fan with 20
+FAN_20,turn on the fan with speed 20 quickly
+FAN_20,hello turn fan with 20
+FAN_40,turn on the fan with speed 40
+FAN_40,help me turn on the fan 40
+FAN_40,turn on the fan 40 now
+FAN_40,hello turn on fan 40
+FAN_40,hello turn on fan with speed 40 now
+FAN_40,hmmmm turn on 40 fan
+FAN_40,can you turn on the fan with 40
+FAN_40,turn on the fan with speed 40 quickly
+FAN_40,hello turn fan with 40
+FAN_60,turn on the fan with speed 60
+FAN_60,help me turn on the fan 60
+FAN_60,turn on the fan 60 now
+FAN_60,hello turn on fan 60
+FAN_60,hello turn on fan with speed 60 now
+FAN_60,hmmmm turn on 40 fan
+FAN_60,can you turn on the fan with 60
+FAN_60,turn on the fan with speed 60 quickly
+FAN_60,hello turn fan with 60
+FAN_80,turn on the fan with speed 80
+FAN_80,help me turn on the fan 80
+FAN_80,turn on the fan 80 now
+FAN_80,hello turn on fan 80
+FAN_80,hello turn on fan with speed 80 now
+FAN_80,hmmmm turn on 80 fan
+FAN_80,can you turn on the fan with 80
+FAN_80,turn on the fan with speed 80 quickly
+FAN_80,hello turn fan with 80
+FAN_100,turn on the fan with speed 100
+FAN_100,help me turn on the fan 100
+FAN_100,turn on the fan 100 now
+FAN_100,hello turn on fan 100
+FAN_100,hello turn on fan with speed 100 now
+FAN_100,hmmmm turn on 100 fan
+FAN_100,can you turn on the fan with 100
+FAN_100,turn on the fan with speed 100 quickly
+FAN_100,hello turn fan with 100
+FAN_100,turn on the fan max speed
+FAN_100,turn on max speed fan
+FAN_100,turn max speed fan now
+LED_ON,please turn on the light
+LED_ON,turn on the light now
+LED_ON,you can turn on the light
+LED_ON,you must turn on the light
+LED_ON,hello turn on light
+LED_ON,turn on light
+LED_OFF,please turn off light
+LED_OFF,turn off light
+LED_OFF,light off
+LED_OFF,must turn off light
+LED_OFF,light is turned off
+DOOR_OPEN,door open
+DOOR_OPEN,open door please
+DOOR_OPEN,you must open door
+DOOR_OPEN,door is openned
+DOOR_OPEN,help me open the door
+DOOR_OPEN,open the door
+LED_ON,turn on the light
+LED_ON,on the light
+LED_ON,turn on the lamp
+LED_ON,on the lamp
+FAN_20,turn on the fan 20%
+FAN_20,turn on the fan 20
+FAN_40,turn on the fan 40%
+FAN_40,turn on the fan 40
+FAN_60,turn on the fan 60%
+FAN_60,turn on the fan 60
+FAN_80,turn on the fan 80%
+FAN_80,turn on the fan 80
+FAN_100,turn on the fan 100%
+FAN_100,turn on the fan 100
+FAN_100,turn on the fan maximum

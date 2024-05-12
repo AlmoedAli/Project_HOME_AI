@@ -122,6 +122,12 @@ li:has(.nav-block.active-page)::after {
 	aspect-ratio: 1/1;
 }
 
+.notification {
+	border: 1px gray solid;
+	border-radius: 16px;
+	cursor: pointer;
+}
+
 .notification:hover {
 	border: 1px gray solid;
 	border-radius: 16px;
