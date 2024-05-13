@@ -1,5 +1,6 @@
 const equipment = require("../../models/equipment");
 const device = require("../../models/device");
+const house = require("../../models/house");
 const { ObjectId } = require('mongodb');
 const usageHistory = require("../../models/usagehistory");
 
@@ -59,34 +60,38 @@ class EquipmentController {
         });
 	}
 
-	index(req, res, next) {
-		equipment
-			.find()
-            .populate({
+	async index(req, res, next) {
+		const user = req.session.user;
+
+		const housesOb = await house.find({ UserID: user._id });
+		const houses = await Promise.all(housesOb.map(async (house) => {
+			// const devicesOb = await equipment.find({ Type: "electricity", HouseID: house._id });
+			// const devices = devicesOb.map(device => device.toObject());
+			const devicesOb = await equipment.find().populate({
                 path: 'DeviceID',
-                match: {
-                    Type: "electricity"
-                }
-            })
-			.then((devicesOb) => {
-				const devices = devicesOb.map((device) => {
-					return {
-						_id: device.DeviceID._id,
-						name: device.DeviceID.Name,
-						location: device.DeviceID.Location,
-						type: device.DeviceID.Type,
-                        adaID: device.DeviceID.AdaID,
-                        state: device.State,
-                        AIO_KEY: process.env.AIO_KEY,
-                        AIO_USERNAME: process.env.AIO_USERNAME,
-					};
-				});
-				res.render("user/equipments", {
-					layout: "main",
-					equipments: devices,
-				});
-			})
-			.catch(next);
+                match: { Type: "electricity", HouseID: house._id }
+            });
+			if (!devicesOb[0].DeviceID) {
+				return { ...house.toObject(), devices: [] };
+			}
+			const devices = devicesOb.map((device) => {
+				return {
+					_id: device.DeviceID._id,
+					name: device.DeviceID.Name,
+					location: device.DeviceID.Location,
+					type: device.DeviceID.Type,
+					adaID: device.DeviceID.AdaID,
+					state: device.State,
+					AIO_KEY: process.env.AIO_KEY,
+					AIO_USERNAME: process.env.AIO_USERNAME,
+				};
+			});
+			return { ...house.toObject(), devices };
+		}));
+		res.render("user/equipments", {
+			layout: "main",
+			houses: houses,
+		});
 	}
 
 	async addNewEquipment(req, res, next) {
