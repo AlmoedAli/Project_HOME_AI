@@ -1,5 +1,7 @@
 :root {
 	--half-gray: rgba(170, 170, 170, 0.5);
+	--primary-purple: rgb(126, 37, 202);
+	--primary-purple-light: rgb(146, 49, 240);
 }
 
 body {
@@ -57,7 +59,7 @@ li:has(.nav-block.active-page)::after {
 } */
 
 .gray-border {
-	border: 1px solid rgba(170, 170, 170, 0.5);
+	border: 1px solid var(--half-gray);
 }
 
 .gap-24,
@@ -113,7 +115,7 @@ li:has(.nav-block.active-page)::after {
 }
 
 .toggle-switch[data-state="true"] {
-	background-color: #7e25ca;
+	background-color: var(--primary-purple);
 	flex-direction: row-reverse;
 }
 
@@ -132,4 +134,13 @@ li:has(.nav-block.active-page)::after {
 	border: 1px gray solid;
 	border-radius: 16px;
 	cursor: pointer;
+}
+
+.btn-purple {
+	background-color: var(--primary-purple);
+	color: white;
+}
+
+.btn-purple:hover {
+	background-color: var(--primary-purple-light);
 }
