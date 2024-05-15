@@ -34,5 +34,4 @@ var register = function (Handlebars) {
 module.exports.register = register;
 module.exports.repeat = repeat;
 module.exports.readSVG = readSVG;
-// module.exports.print = print;
 module.exports.helpers = register(null);

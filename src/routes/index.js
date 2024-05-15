@@ -4,6 +4,7 @@ const sensorRouter = require('./user/sensor');
 const notificationRouter = require('./user/notification');
 const LoginRouter = require('./user/login')
 const SignUpRouter = require('./user/signup')
+const ProfileRouter = require('./user/profile')
 
 function route(app) {
     app.use('/', homepageRouter);
@@ -12,6 +13,7 @@ function route(app) {
     app.use('/notification', notificationRouter);
     app.use('/login',LoginRouter)
     app.use('/signup',SignUpRouter)
+    app.use('/profile',ProfileRouter)
 }
 
 module.exports = route;
