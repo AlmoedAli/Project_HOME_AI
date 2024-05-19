@@ -1,5 +1,6 @@
 const sensor = require("../../models/sensor");
 const device = require("../../models/device");
+const house = require("../../models/house");
 const { ObjectId } = require('mongodb');
 const readingHistory = require("../../models/readinghistory");
 
@@ -8,26 +9,20 @@ const AIO_KEY = process.env.AIO_KEY;
 
 class SensorController {
 
-	index(req, res, next) {
-		device
-			.find({ Type: "sensor" })
-			.then((devicesOb) => {
-				const devices = devicesOb.map((device) => {
-					return {
-						_id: device._id,
-						name: device.Name,
-						location: device.Location,
-						type: device.Type,
-						state: device.State
-					};
-				});
-				res.render("user/sensors", {
-					layout: "main",
-					sensors: devices,
+	async index(req, res, next) {
+		const user = req.session.user;
 
-				});
-			})
-			.catch(next);
+		const housesOb = await house.find({ UserID: user._id });
+		const houses = await Promise.all(housesOb.map(async (house) => {
+			const devicesOb = await device.find({ Type: "sensor", HouseID: house._id });
+			const devices = devicesOb.map(device => device.toObject());
+			return { ...house.toObject(), devices };
+		}));
+
+		res.render("user/sensors", {
+			layout: "main",
+			houses: houses,
+		});
 	}
 
 	async getSensor(req, res, next) {

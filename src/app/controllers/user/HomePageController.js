@@ -1,6 +1,7 @@
 const homepage = require('../../models/homepage');
 const sensor = require('../../models/sensor');
 const equipment = require('../../models/equipment');
+const house = require('../../models/house');
 const device = require('../../models/device');
 
 class HomePageController {

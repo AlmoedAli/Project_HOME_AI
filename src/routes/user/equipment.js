@@ -8,5 +8,6 @@ router.get("/:id", isAuthenticated, equipmentController.getEquipment);
 router.get("/:id/edit", isAuthenticated, equipmentController.index_modify);
 router.post("/:id/edit", isAuthenticated, equipmentController.equipment_modify);
 router.delete("/delete", isAuthenticated, equipmentController.deleteAllEquipments);
+
 module.exports = router;
     

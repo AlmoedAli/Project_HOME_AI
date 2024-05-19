@@ -3,7 +3,6 @@ const router = express.Router();
 const { isAuthenticated } = require("../../middlewares/session");
 const sensorController = require("../../app/controllers/user/SensorController");
 
-// router.get("/main", sensorController.getSensors);
 router.get("/", isAuthenticated, sensorController.index);
 router.get("/:id", isAuthenticated, sensorController.getSensor);
 router.get("/:id/edit", isAuthenticated, sensorController.index_modify);
