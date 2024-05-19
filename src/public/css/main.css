@@ -144,3 +144,18 @@ li:has(.nav-block.active-page)::after {
 .btn-purple:hover {
 	background-color: var(--primary-purple-light);
 }
+
+.homepage-btn {
+	background-color: #7E25CA;
+	color: white;
+	padding: 8px 24px;
+	text-align: center;
+	display: inline-block;
+}
+.homepage-btn:hover {
+	background-color: white;
+	border-color: #6b1ea3;
+	text-decoration: none;
+	color: black;
+}
+

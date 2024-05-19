@@ -65,8 +65,6 @@ class EquipmentController {
 
 		const housesOb = await house.find({ UserID: user._id });
 		const houses = await Promise.all(housesOb.map(async (house) => {
-			// const devicesOb = await equipment.find({ Type: "electricity", HouseID: house._id });
-			// const devices = devicesOb.map(device => device.toObject());
 			const devicesOb = await equipment.find().populate({
                 path: 'DeviceID',
                 match: { Type: "electricity", HouseID: house._id }
@@ -84,6 +82,7 @@ class EquipmentController {
 					state: device.State,
 					AIO_KEY: process.env.AIO_KEY,
 					AIO_USERNAME: process.env.AIO_USERNAME,
+					equipType: device.ElectricityEqType,
 				};
 			});
 			return { ...house.toObject(), devices };

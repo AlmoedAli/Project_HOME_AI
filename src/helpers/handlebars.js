@@ -18,7 +18,7 @@ var register = function (Handlebars) {
 		repeat,
 		readSVG,
 		print: function (value) {
-			console.log(value);
+			// console.log(value);
 		},
 	};
 

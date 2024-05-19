@@ -137,56 +137,35 @@
                             <h5>Thông báo</h5>
                         </div>
                         <div class="col-6 d-flex justify-content-end mt-2 mb-2">
-                            <button type="button" class="btn" style="background-color: #7E25CA; color: white; padding: 8px 24px;">Xem tất cả</button>
+                            <a href="/notification" class="btn homepage-btn">Xem tất cả</a>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-10"><p>Cảm biến độ ẩm vượt ngưỡng</p></div>
+                    {{#each notifications}}
+                    <div class="row noti">
+                        <div class="col-10"><p>{{type}}</p></div>
                         <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
-                            <p>12:39</p>
+                            <p class="notitime">{{time}}</p>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-10"><p>Bật đèn 1</p></div>
-                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
-                            <p>12:15</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-10"><p>Cảm biến nhiệt độ vượt ngưỡng</p></div>
-                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
-                            <p>9:11</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-10"><p>Giọng nói lạ</p></div>
-                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
-                            <p>8:02</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-10"><p>Giọng nói lạ</p></div>
-                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
-                            <p>8:00</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-10"><p>Giọng nói lạ</p></div>
-                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
-                            <p>7:43</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-10"><p>Tắt đèn 1</p></div>
-                        <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
-                            <p>7:15</p>
-                        </div>
-                    </div>
+                    {{/each}}
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    var notifications = document.querySelectorAll('.noti');
+    notifications.forEach(function(notification, index) {
+        var timeTurnOnString = notification.querySelector('.notitime').innerText;
+        var timeTurnOn = new Date(timeTurnOnString);
+        var turnOnMonth = timeTurnOn.getMonth() + 1;
+        var turnOnDate = timeTurnOn.getDate();
+        var turnOnYear = timeTurnOn.getFullYear();
+        var timeTurnOnFormatted = ('0' + turnOnDate).slice(-2) + '/' + ('0' + turnOnMonth).slice(-2) + '/20' + ('0' + turnOnYear).slice(-2);
+        notification.querySelector('.notitime').innerText = timeTurnOnFormatted;
+    });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const temperatureData = {
