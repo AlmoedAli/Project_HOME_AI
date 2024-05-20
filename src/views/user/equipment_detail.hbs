@@ -27,13 +27,7 @@
                                 Vị trí: {{device.Location}}
                             </div>
                             <div class="col-6 m-0 p-0 mt-2">
-                                Trạng thái: <span id="state">
-                                    {{#if device.State}}
-                                        Bật
-                                    {{else}}
-                                        Tắt
-                                    {{/if}}
-                                </span>
+                                Trạng thái: <span id="state"></span>
                             </div>
                         </div>
                     </div>
@@ -121,7 +115,6 @@
 <script>
     var timedata = {{timedata}};
     var timelabels = {{{timelabels}}};
-
     const timeData = {
         labels: timelabels,
         datasets: [{
@@ -154,6 +147,13 @@
     };
 
     var timeLineChart = new Chart(document.getElementById('timeLineChart'), timeConfig);
+
+    var stateDiv = document.getElementById('state');
+    if (state) {
+        stateDiv.innerText = "Bật";
+    } else {
+        stateDiv.innerText = "Tắt";
+    }
 
     var isTimer = {{equipment.Timer.isTimer}};
     var isTimerDiv = document.getElementById('isTimer');
