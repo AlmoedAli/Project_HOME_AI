@@ -66,7 +66,7 @@
             <div class="col-11 m-0 mt-2 mb-3 justify-content-center">
                 <div class="row justify-content-end">
                     <div class="col-auto p-0 me-3">
-                        <a href="/sensor/{{device._id}}" type="button" class="btn btn-danger"> Huỷ bỏ </a>
+                        <a href="/sensor" type="button" class="btn btn-danger"> Huỷ bỏ </a>
                     </div>
                     <div class="col-auto p-0">
                         <button type="submit" class="btn btn-purple">Lưu</button>
@@ -87,7 +87,7 @@
                 Error.style.display = "block"
             else {
                 await axios({ method: 'post', url: '/sensor/{{device._id}}/edit', data: { UpperBound, LowerBound } })
-                window.location.assign('/sensor/{{device._id}}')
+                window.location.assign('/sensor')
             }
         })
 </script>
