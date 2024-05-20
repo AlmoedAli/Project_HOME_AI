@@ -1,10 +1,12 @@
 const db = require("./config/db");
-// const adafruit = require("./config/adafruit");
+const adafruit = require("./config/adafruit");
 const noti = require("./config/notification");
+const timer = require("./config/timer");
 
 db.connect();
 // adafruit.getDataInterval(10000, 5000);
 noti.watcher();
+timer.watcher();
 
 const express = require("express");
 
