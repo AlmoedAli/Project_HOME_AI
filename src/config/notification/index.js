@@ -49,7 +49,8 @@ function watcher() {
                             Type: dev.Type,
                             Time: Date.now(),
                             Value: value,
-                            DeviceID: dev._id
+                            DeviceID: dev._id,
+                            Seen: false
                         });
                         newData.save();
                     }
@@ -58,7 +59,8 @@ function watcher() {
                         Type: dev.Type,
                         Time: Date.now(),
                         Value: value,
-                        DeviceID: dev._id
+                        DeviceID: dev._id,
+                        Seen: false
                     });
                     newData.save();
                 }
