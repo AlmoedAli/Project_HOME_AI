@@ -125,13 +125,14 @@ li:has(.nav-block.active-page)::after {
 }
 
 .notification {
-	border: 1px gray solid;
+	border: 1px lightgray solid;
 	border-radius: 16px;
 	cursor: pointer;
+	margin-bottom: 8px;
 }
 
 .notification:hover {
-	border: 1px gray solid;
+	border: 1px black solid;
 	border-radius: 16px;
 	cursor: pointer;
 }
@@ -142,7 +143,11 @@ li:has(.nav-block.active-page)::after {
 }
 
 .btn-purple:hover {
-	background-color: var(--primary-purple-light);
+	/* background-color: var(--primary-purple-light); */
+	background-color: white;
+	border-color: #6b1ea3;
+	text-decoration: none;
+	color: black;
 }
 
 .homepage-btn {

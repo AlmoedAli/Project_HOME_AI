@@ -20,6 +20,9 @@ var register = function (Handlebars) {
 		print: function (value) {
 			// console.log(value);
 		},
+		eq: function (v1, v2) {
+            return v1 === v2;
+        },
 	};
 
 	if (Handlebars && typeof Handlebars.registerHelper === "function") {

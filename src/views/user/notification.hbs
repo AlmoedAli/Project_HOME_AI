@@ -17,11 +17,22 @@
     </div>
 
     {{#each notifications}}
-    <div class="row mb-0 notification" onclick="redirectToNotification('{{_id}}')">
+    <div class="row notification" onclick="redirectToNotification('{{_id}}')">
         <div class="col-1 p-2 mb-0">
         </div>
         <div class="col-6 p-2 mb-0">
-            <p class="m-0 notitype">{{type}}</p>
+            <p class="m-0 notitype">
+                {{#if (eq type "sensor")}}
+                Cảm biến {{detail}} vượt ngưỡng
+                {{else}}
+                    {{#if (eq value 1)}}
+                    Bật 
+                    {{else}}
+                    Tắt 
+                    {{/if}}
+                    thiết bị {{detail}} 
+                {{/if}}
+            </p>
         </div>
         <div class="col-3 p-2 mb-0">
             <p class="m-0 notitime">{{time}}</p>

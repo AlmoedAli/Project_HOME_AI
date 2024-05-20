@@ -142,7 +142,18 @@
                     </div>
                     {{#each notifications}}
                     <div class="row noti">
-                        <div class="col-10"><p>{{type}}</p></div>
+                        <div class="col-10"><p>
+                            {{#if (eq type "sensor")}}
+                            Cảm biến vượt ngưỡng
+                            {{else}}
+                                {{#if (eq value 1)}}
+                                Bật 
+                                {{else}}
+                                Tắt 
+                                {{/if}}
+                                thiết bị
+                            {{/if}}
+                        </p></div>
                         <div class="col-2 d-flex justify-content-end" style="color:#aaaaaa">
                             <p class="notitime">{{time}}</p>
                         </div>
@@ -236,26 +247,5 @@
 
     updateTime();
     setInterval(updateTime, 1000);
-
-    function toggleIcon(num) {
-        var toggle = document.getElementById('toggle' + num.toString());
-        var lightbulb = document.getElementById('lightbulb' + num.toString());
-
-        if (toggle.classList.contains('bi-toggle-on')) {
-            toggle.classList.remove('bi-toggle-on');
-            toggle.classList.add('bi-toggle-off');
-            toggle.setAttribute('fill', 'black');
-            toggle.innerHTML = '<path d="M11 4a4 4 0 0 1 0 8H8a5 5 0 0 0 2-4 5 5 0 0 0-2-4zm-6 8a4 4 0 1 1 0-8 4 4 0 0 1 0 8M0 8a5 5 0 0 0 5 5h6a5 5 0 0 0 0-10H5a5 5 0 0 0-5 5"/>'
-
-            lightbulb.setAttribute('fill', 'black');
-        } else if (toggle.classList.contains('bi-toggle-off')) {
-            toggle.classList.remove('bi-toggle-off');
-            toggle.classList.add('bi-toggle-on');
-            toggle.setAttribute('fill', '#7E25CA');
-            toggle.innerHTML = '<path d="M5 3a5 5 0 0 0 0 10h6a5 5 0 0 0 0-10zm6 9a4 4 0 1 1 0-8 4 4 0 0 1 0 8"/>';
-
-            lightbulb.setAttribute('fill', '#7E25CA');
-        }
-    }
 
 </script>

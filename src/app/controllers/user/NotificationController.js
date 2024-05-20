@@ -7,14 +7,25 @@ const { ObjectId } = require('mongodb');
 class NotificationController {
     async index(req, res, next) {
         const notificationsOb = await notification.find();
-        const notifications = notificationsOb.map(notification => {
+        const notifications = await Promise.all(notificationsOb.map(async (noti) => {
+            let detail;
+            if (noti.Type == "sensor") {
+                let temp = (await sensor.findOne({ DeviceID: noti.DeviceID })).toObject();
+                detail = temp.SensorType;
+            }
+            else if (noti.Type == "electricity") {
+                let temp = (await equipment.findOne({ DeviceID: noti.DeviceID })).toObject();
+                detail = temp.ElectricityEqType;
+            }
             return {
-                _id: notification._id,
-                type: notification.Type,
-                time: notification.Time,
-                seen: notification.Seen,
+                _id: noti._id,
+                type: noti.Type,
+                time: noti.Time,
+                seen: noti.Seen,
+                value: noti.Value,
+                detail: detail
             };
-        });
+        }));
         res.render('user/notification', {
             layout: 'main',
             notifications: notifications
