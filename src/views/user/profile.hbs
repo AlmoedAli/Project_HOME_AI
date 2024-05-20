@@ -1,5 +1,5 @@
 <div class="d-flex flex-row justify-content-between align-items-center">
-    <h1 class="flex-grow-1">Thông tin người dùng</h1>
+    <h2 class="flex-grow-1">Thông tin người dùng</h2>
 </div>
 
 <div class="d-flex flex-column bg-white align-items-center container-fluid gray-border gap-3 border-radius-24 w-75"
@@ -24,45 +24,25 @@
     <hr class="m-1 w-100">
     <div class="container-fluid row justify-content-center">
         <div class="row mb-3 p-0 w-100">
-            <h4 class="col">Giọng nói</h4>
-            {{#if voicePath}}
+            <h4 class="col">Danh sách nhà ở</h4>
+        </div>
+        <div class="row">
+            {{#each houses}}
+            {{#if @first}}
             {{else}}
-            <div class="col-auto p-0">
-                <button class="btn btn-purple m-0 border-0 py-2 px-3 rounded-3 d-flex align-items-center gap-1">Ghi âm
-                    {{{readSVG "mic-icon"}}}</button>
-            </div>
+            <hr style="height: 0.2px;">
             {{/if}}
+            <div class="container-fluid mb-3 p-0">
+                <div class="row mb-1">
+                    <div class="col-2 fw-bold">Tên</div>
+                    <div class="col">{{name}}</div>
+                </div>
+                <div class="row">
+                    <div class="col-2 fw-bold">Địa chỉ</div>
+                    <div class="col">{{address}}</div>
+                </div>
+            </div>
+            {{/each}}
         </div>
-        {{#if voicePath}}
-        <div class="d-flex flex-col gap-5">
-            <audio controls src="{{voicePath}}" class="flex-grow-1"></audio>
-            <button class="btn btn-danger" onclick="removeVoice()">{{{readSVG "bin-icon"}}}</button>
-        </div>
-        {{else}}
-        <div class="text-center p-4 rounded-3 w-100" style="border: 2px dashed #444; background-color: #f4f4f4;">
-            <label class="btn btn-purple m-3 border-0 py-2 px-3 rounded-3" for="voice-input">
-                Chọn file
-            </label>
-            <input type="file" name="voice" id="voice-input" hidden accept="audio/*" onchange="addVoice(this)">
-            <p>...hoặc thả file vào đây</p>
-        </div>
-        {{/if}}
     </div>
 </div>
-
-<script>
-    async function removeVoice() {
-        const temp = await axios.delete('http://localhost:8000/profile/voice')
-        location.reload()
-    }
-    async function addVoice(element) {
-        var formData = new FormData();
-        formData.append("voice", element.files[0]);
-        const temp = await axios.post('http://localhost:8000/profile/voice', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            }
-        })
-        location.reload()
-    }
-</script>
