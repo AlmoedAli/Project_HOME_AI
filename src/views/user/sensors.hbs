@@ -1,15 +1,6 @@
-<div class="d-flex flex-row justify-content-between align-items-center">
-    <h1 class="flex-grow-1">Các cảm biến</h1>
-    {{!-- {{> listViewButton}}
-    {{> normalButton content="+ Thêm cảm biến"}} --}}
-</div>
+<h2>Các cảm biến</h2>
 
 <div class="d-flex flex-column bg-white container-fluid gray-border gap-24 border-radius-24" style="padding: 24px;">
-    {{!-- <div class="d-flex align-items-center p-0 justify-content-between" style="gap: 24px; height: 40px;">
-        {{> searchBar}}
-        {{> dataList selections=selections}}
-    </div> --}}
-
     {{#each houses}}
     <div class="col p-2">
         <div class="card app-shadow">
@@ -26,10 +17,8 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">{{this.name}}</h5>
-                            {{!-- <p class="card-text">Ngưỡng an toàn trên: {{this.rangeUp}}</p>
-                            <p class="card-text">Ngưỡng an toàn dưới: {{this.rangeDown}}</p> --}}
                             <p class="card-text">Vị trí: {{this.location}}</p>
-                            <a href="./sensor/{{this._id}}/" class="btn" style="background-color:#7E25CA; color: white">Chi tiết</a>
+                            <a href="./sensor/{{this._id}}/" class="btn btn-purple">Chi tiết</a>
                         </div>
                     </div>
                 </div>
@@ -41,7 +30,7 @@
 </div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("DOMContentLoaded", function () {
         const equipTypeElements = document.querySelectorAll('.equip-type');
         equipTypeElements.forEach(element => {
             if (element.innerHTML.trim() === 'Nhiệt độ') {
