@@ -14,8 +14,6 @@ class SensorController {
 
 		const housesOb = await house.find({ UserID: user._id });
 		const houses = await Promise.all(housesOb.map(async (house) => {
-			// const devicesOb = await device.find({ Type: "sensor", HouseID: house._id });
-			// const devices = devicesOb.map(device => device.toObject());
 			const devicesOb = await sensor.find().populate({
                 path: 'DeviceID',
                 match: { Type: "sensor", HouseID: house._id }
