@@ -10,7 +10,7 @@
             <p class="m-0">Tên cảm biến:</p>
         </div>
         <div class="col-6 p-2 mb-0">
-            <p class="m-0">EG-520 224 chưa có chỗ này</p>
+            <p class="m-0">{{dev.Name}}</p>
         </div>
     </div>
     <div class="row mb-0">
@@ -40,7 +40,7 @@
             <p class="m-0">Ngưỡng an toàn:</p>
         </div>
         <div class="col-6 p-2 mb-0">
-            <p class="m-0">{{detail.SafetyRange.LowerBound}}{{detail.Unit}} - {{detail.SafetyRange.UpperBound}}{{detail.Unit}}</p>
+            <p class="m-0">{{detail.SafetyRange.LowerBound}} {{detail.Unit}} - {{detail.SafetyRange.UpperBound}} {{detail.Unit}}</p>
         </div>
     </div>
     <div class="row mb-0">
@@ -50,7 +50,7 @@
             <p class="m-0">Giá trị ghi nhận:</p>
         </div>
         <div class="col-6 p-2 mb-0">
-            <p class="m-0">{{noti.Value}}{{detail.Unit}}</p>
+            <p class="m-0">{{noti.Value}} {{detail.Unit}}</p>
         </div>
     </div>
     <div class="row mb-0">
