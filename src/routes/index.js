@@ -3,6 +3,7 @@ const equipmentRouter = require('./user/equipment');
 const sensorRouter = require('./user/sensor');
 const notificationRouter = require('./user/notification');
 const LoginRouter = require('./user/login')
+const LogoutRouter = require('./user/logout')
 const SignUpRouter = require('./user/signup')
 const ProfileRouter = require('./user/profile')
 
@@ -11,9 +12,10 @@ function route(app) {
     app.use('/equipment', equipmentRouter);
     app.use('/sensor', sensorRouter);
     app.use('/notification', notificationRouter);
-    app.use('/login',LoginRouter)
-    app.use('/signup',SignUpRouter)
-    app.use('/profile',ProfileRouter)
+    app.use('/login',LoginRouter);
+    app.use('/logout',LogoutRouter);
+    app.use('/signup',SignUpRouter);
+    app.use('/profile',ProfileRouter);
 }
 
 module.exports = route;
